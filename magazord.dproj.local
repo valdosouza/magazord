@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/06/10 19:03:16.000.000,=D:\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/06/16 15:04:08.000.984,=D:\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/06/16 15:04:56.000.697,=D:\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/06/16 15:06:17.000.237,=D:\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/06/18 08:10:48.000.990,=D:\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/06/19 13:04:00.000.895,=D:\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/06/19 13:07:01.000.802,D:\magazord\main.pas=D:\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/06/19 13:07:01.000.802,D:\magazord\main.dfm=D:\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2024/06/19 13:07:07.000.948,D:\magazord\magazord.dproj=D:\Documents\Embarcadero\Studio\Projects\Project2.dproj</Transaction>
+    <Transaction>2024/06/19 13:12:32.000.599,=D:\magazord\view\inheritable\Un_Base.pas</Transaction>
+    <Transaction>2024/06/19 13:12:44.000.800,=D:\magazord\view\inheritable\base_search.pas</Transaction>
+    <Transaction>2024/06/19 13:12:44.000.502,=D:\magazord\view\inheritable\base_registry.pas</Transaction>
+    <Transaction>2024/06/19 13:35:33.000.280,=D:\magazord\Unit1.pas</Transaction>
+    <Transaction>2024/06/19 13:35:53.000.442,D:\magazord\un_dm.pas=D:\magazord\Unit1.pas</Transaction>
+    <Transaction>2024/06/19 13:35:53.000.442,D:\magazord\un_dm.dfm=D:\magazord\Unit1.dfm</Transaction>
+    <Transaction>2024/06/19 14:12:16.450,=D:\magazord\Unit1.pas</Transaction>
+    <Transaction>2024/06/19 14:12:36.689,D:\magazord\controller\ControllerPermissao.pas=D:\magazord\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>
