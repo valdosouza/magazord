@@ -7,7 +7,13 @@ uses
   base_registry in 'view\inheritable\base_registry.pas' {BaseRegistry},
   base_search in 'view\inheritable\base_search.pas' {BaseSearch},
   un_dm in 'un_dm.pas' {DM: TDataModule},
-  ControllerPermissao in 'controller\ControllerPermissao.pas';
+  ControllerPermissao in 'controller\ControllerPermissao.pas',
+  ModelMGPedidoPromocoes in 'model\ModelMGPedidoPromocoes.pas',
+  ModelMGPedidoRastreio in 'model\ModelMGPedidoRastreio.pas',
+  ModelMGPedidoHistorico in 'model\ModelMGPedidoHistorico.pas',
+  ModelMGPedidoNotaFiscal in 'model\ModelMGPedidoNotaFiscal.pas',
+  ModelMGPedidoItem in 'model\ModelMGPedidoItem.pas',
+  ModelMGPedido in 'model\ModelMGPedido.pas';
 
 {$R *.res}
 
