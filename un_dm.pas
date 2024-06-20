@@ -16,8 +16,9 @@ type
     Qr_Crud: TSTQuery;
   private
     { Private declarations }
+
   public
-    { Public declarations }
+    procedure DatabaseConnect;
   end;
 
 var
@@ -29,4 +30,28 @@ implementation
 
 {$R *.dfm}
 
+procedure TDM.DatabaseConnect;
+Var
+  LcServer, LcPort, LcDatabase,LcUserName,LcPassword : String;
+begin
+  LcServer   := 'NOTEVALDO';
+  LcPort     := '3060';
+  LcDatabase := 'D:\Modelos\erp\Database\IBGCOM.FDB';
+  LcUserName := 'sysdba';
+  LcPassword := 'masterkey';
+
+  DM.IBD_Gestao.Close;
+  DM.IBD_Gestao.DatabaseName := Concat(LcServer,'/',LcPort,LcDatabase);
+  {
+  DM.IBD_Gestao.Params.Clear;
+  DM.IBD_Gestao.Params.Add('Protocol=TCPIP');
+  DM.IBD_Gestao.Params.Add('Server='+LcServer);
+  DM.IBD_Gestao.Params.Add('Database='+LcDatabase);
+  DM.IBD_Gestao.Params.Add('User_Name='+LcUsername);
+  DM.IBD_Gestao.Params.Add('Password='+LcPassword);
+  DM.IBD_Gestao.Params.Add('DriverID=FB');
+  DM.IBD_Gestao.Params.Add('Port=3350');
+  }
+  DM.IBD_Gestao.Connected := True;
+end;
 end.

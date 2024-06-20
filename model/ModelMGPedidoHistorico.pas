@@ -32,22 +32,42 @@ type
     procedure setFTipoUsuario(const Value: string);
 
   public
+    [FieldName('Id')]
     property Id: Integer read FId write setFId;
+
+    [FieldName('DataHora')]
     property DataHora: TDateTime read FDataHora write setFDataHora;
+
+    [FieldName('PedidoSituacao')]
     property PedidoSituacao: Integer read FPedidoSituacao write setFPedidoSituacao;
+
+    [FieldName('PedidoSituacaoDescricao')]
     property PedidoSituacaoDescricao: string read FPedidoSituacaoDescricao write setFPedidoSituacaoDescricao;
+
+    [FieldName('PedidoSituacaoDescricaoDetalhada')]
     property PedidoSituacaoDescricaoDetalhada: string read FPedidoSituacaoDescricaoDetalhada write setFPedidoSituacaoDescricaoDetalhada;
+
+    [FieldName('Tipo')]
     property Tipo: Integer read FTipo write setFTipo;
+
+    [FieldName('Etapa')]
     property Etapa: Integer read FEtapa write setFEtapa;
+
+    [FieldName('Situacao')]
     property Situacao: Integer read FSituacao write setFSituacao;
+
+    [FieldName('NomeUsuario')]
     property NomeUsuario: string read FNomeUsuario write setFNomeUsuario;
+
+    [FieldName('TipoUsuario')]
     property TipoUsuario: string read FTipoUsuario write setFTipoUsuario;
+
+    [FieldName('PedidoRastreioId')]
     property PedidoRastreioId: string read FPedidoRastreioId write setFPedidoRastreioId;
+
   end;
 
 implementation
-
-{ TMGPedidoHistorico }
 
 { TMGPedidoHistorico }
 

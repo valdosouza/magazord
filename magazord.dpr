@@ -13,14 +13,15 @@ uses
   ModelMGPedidoHistorico in 'model\ModelMGPedidoHistorico.pas',
   ModelMGPedidoNotaFiscal in 'model\ModelMGPedidoNotaFiscal.pas',
   ModelMGPedidoItem in 'model\ModelMGPedidoItem.pas',
-  ModelMGPedido in 'model\ModelMGPedido.pas';
+  ModelMGPedido in 'model\ModelMGPedido.pas',
+  ModelMGPedidoRetorno in 'model\ModelMGPedidoRetorno.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TFrMain, FrMain);
   Application.CreateForm(TDM, DM);
+  Application.CreateForm(TFrMain, FrMain);
   Application.Run;
 end.

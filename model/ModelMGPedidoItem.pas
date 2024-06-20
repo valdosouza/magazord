@@ -8,18 +8,18 @@ uses
 type
   TMGPedidoItem = Class(TGenericEntity)
   private
-    FValorFrete: Double;
+    FValorFrete: Real;
     FMidiaName: string;
     FMidiaPath: string;
     FProdutoTitulo: string;
-    FValorAcrescimo: Double;
-    FValorDesconto: Double;
+    FValorAcrescimo: Real;
+    FValorDesconto: Real;
     FLinkProduto: string;
     FProdutoDerivacaoNome: string;
     FDescricao: string;
-    FValorTransportadora: Double;
+    FValorTransportadora: Real;
     FIsPresente: Boolean;
-    FValorUnitario: Double;
+    FValorUnitario: Real;
     FMidiaAlt: string;
     FDepositoNome: string;
     FProdutoId: Integer;
@@ -31,7 +31,7 @@ type
     FMarcaNome: string;
     FCategoriaArvore: string;
     FQuantidade: Integer;
-    FValorItem: Double;
+    FValorItem: Real;
     FProdutoDerivacaoCodigoKit: string;
     FProdutoDerivacaoCodigo: string;
     FEan: string;
@@ -68,52 +68,116 @@ type
     procedure setFProdutoNome(const Value: string);
     procedure setFProdutoTitulo(const Value: string);
     procedure setFQuantidade(const Value: Integer);
-    procedure setFValorAcrescimo(const Value: Double);
-    procedure setFValorDesconto(const Value: Double);
-    procedure setFValorFrete(const Value: Double);
-    procedure setFValorItem(const Value: Double);
-    procedure setFValorTransportadora(const Value: Double);
-    procedure setFValorUnitario(const Value: Double);
+    procedure setFValorAcrescimo(const Value: Real);
+    procedure setFValorDesconto(const Value: Real);
+    procedure setFValorFrete(const Value: Real);
+    procedure setFValorItem(const Value: Real);
+    procedure setFValorTransportadora(const Value: Real);
+    procedure setFValorUnitario(const Value: Real);
 
   public
+    [FieldName('Id')]
     property Id: Integer read FId write setFId;
+
+    [FieldName('ProdutoDerivacaoId')]
     property ProdutoDerivacaoId: Integer read FProdutoDerivacaoId write setFProdutoDerivacaoId;
+
+    [FieldName('Descricao')]
     property Descricao: string read FDescricao write setFDescricao;
+
+    [FieldName('Quantidade')]
     property Quantidade: Integer read FQuantidade write setFQuantidade;
-    property ValorUnitario: Double read FValorUnitario write setFValorUnitario;
-    property ValorDesconto: Double read FValorDesconto write setFValorDesconto;
-    property ValorAcrescimo: Double read FValorAcrescimo write setFValorAcrescimo;
-    property ValorItem: Double read FValorItem write setFValorItem;
-    property ValorFrete: Double read FValorFrete write setFValorFrete;
-    property ValorTransportadora: Double read FValorTransportadora write setFValorTransportadora;
+
+    [FieldName('ValorUnitario')]
+    property ValorUnitario: Real read FValorUnitario write setFValorUnitario;
+
+    [FieldName('ValorDesconto')]
+    property ValorDesconto: Real read FValorDesconto write setFValorDesconto;
+
+    [FieldName('ValorAcrescimo')]
+    property ValorAcrescimo: Real read FValorAcrescimo write setFValorAcrescimo;
+
+    [FieldName('ValorItem')]
+    property ValorItem: Real read FValorItem write setFValorItem;
+
+    [FieldName('ValorFrete')]
+    property ValorFrete: Real read FValorFrete write setFValorFrete;
+
+    [FieldName('ValorTransportadora')]
+    property ValorTransportadora: Real read FValorTransportadora write setFValorTransportadora;
+
+    [FieldName('DataPreVenda')]
     property DataPreVenda: TDateTime read FDataPreVenda write setFDataPreVenda;
+
+    [FieldName('IsPresente')]
     property IsPresente: Boolean read FIsPresente write setFIsPresente;
+
+    [FieldName('Deposito')]
     property Deposito: Integer read FDeposito write setFDeposito;
+
+    [FieldName('DepositoNome')]
     property DepositoNome: string read FDepositoNome write setFDepositoNome;
+
+    [FieldName('ProdutoDerivacaoCodigo')]
     property ProdutoDerivacaoCodigo: string read FProdutoDerivacaoCodigo write setFProdutoDerivacaoCodigo;
+
+    [FieldName('CodigoPai')]
     property CodigoPai: string read FCodigoPai write setFCodigoPai;
+
+    [FieldName('ProdutoTitulo')]
     property ProdutoTitulo: string read FProdutoTitulo write setFProdutoTitulo;
+
+    [FieldName('ProdutoId')]
     property ProdutoId: Integer read FProdutoId write setFProdutoId;
+
+    [FieldName('ProdutoNome')]
     property ProdutoNome: string read FProdutoNome write setFProdutoNome;
+
+    [FieldName('ProdutoDerivacaoCodigoKit')]
     property ProdutoDerivacaoCodigoKit: string read FProdutoDerivacaoCodigoKit write setFProdutoDerivacaoCodigoKit;
+
+    [FieldName('AnuncioMarketplaceId')]
     property AnuncioMarketplaceId: Integer read FAnuncioMarketplaceId write setFAnuncioMarketplaceId;
+
+    [FieldName('Ean')]
     property Ean: string read FEan write setFEan;
+
+    [FieldName('ProdutoDerivacaoNome')]
     property ProdutoDerivacaoNome: string read FProdutoDerivacaoNome write setFProdutoDerivacaoNome;
+
+    [FieldName('MarcaNome')]
     property MarcaNome: string read FMarcaNome write setFMarcaNome;
+
+    [FieldName('MidiaPath')]
     property MidiaPath: string read FMidiaPath write setFMidiaPath;
+
+    [FieldName('MidiaName')]
     property MidiaName: string read FMidiaName write setFMidiaName;
+
+    [FieldName('MidiaAlt')]
     property MidiaAlt: string read FMidiaAlt write setFMidiaAlt;
+
+    [FieldName('MidiaTipoFile')]
     property MidiaTipoFile: Integer read FMidiaTipoFile write setFMidiaTipoFile;
+
+    [FieldName('CategoriaArvore')]
     property CategoriaArvore: string read FCategoriaArvore write setFCategoriaArvore;
+
+    [FieldName('CategoriaId')]
     property CategoriaId: Integer read FCategoriaId write setFCategoriaId;
+
+    [FieldName('Categoria')]
     property Categoria: string read FCategoria write setFCategoria;
+
+    [FieldName('LinkProduto')]
     property LinkProduto: string read FLinkProduto write setFLinkProduto;
+
+    [FieldName('PedidoItemListaPresente')]
     property PedidoItemListaPresente: String read FPedidoItemListaPresente write setFPedidoItemListaPresente;
+
   end;
 
 implementation
-
-{ TMGPedidoItem }
 
 { TMGPedidoItem }
 
@@ -252,32 +316,32 @@ begin
   FQuantidade := Value;
 end;
 
-procedure TMGPedidoItem.setFValorAcrescimo(const Value: Double);
+procedure TMGPedidoItem.setFValorAcrescimo(const Value: Real);
 begin
   FValorAcrescimo := Value;
 end;
 
-procedure TMGPedidoItem.setFValorDesconto(const Value: Double);
+procedure TMGPedidoItem.setFValorDesconto(const Value: Real);
 begin
   FValorDesconto := Value;
 end;
 
-procedure TMGPedidoItem.setFValorFrete(const Value: Double);
+procedure TMGPedidoItem.setFValorFrete(const Value: Real);
 begin
   FValorFrete := Value;
 end;
 
-procedure TMGPedidoItem.setFValorItem(const Value: Double);
+procedure TMGPedidoItem.setFValorItem(const Value: Real);
 begin
   FValorItem := Value;
 end;
 
-procedure TMGPedidoItem.setFValorTransportadora(const Value: Double);
+procedure TMGPedidoItem.setFValorTransportadora(const Value: Real);
 begin
   FValorTransportadora := Value;
 end;
 
-procedure TMGPedidoItem.setFValorUnitario(const Value: Double);
+procedure TMGPedidoItem.setFValorUnitario(const Value: Real);
 begin
   FValorUnitario := Value;
 end;

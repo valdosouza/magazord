@@ -7,33 +7,40 @@ uses
 
 type
   TMGPedidoPromocoes = Class(TGenericEntity)
+    type
+      TPromocoesUtilizadas  = array of String;
+
   private
     FTotalPromocoesUtilizadas: Integer;
-    FTotalDesconto: Double;
-    FPromocoesUtilizadas: TList<TStringList>;
-    procedure setFPromocoesUtilizadas(const Value: TList<TStringList>);
-    procedure setFTotalDesconto(const Value: Double);
+    FTotalDesconto: Real;
+    FPromocoesUtilizadas: TPromocoesUtilizadas;
+    procedure setFPromocoesUtilizadas(const Value: TPromocoesUtilizadas);
+    procedure setFTotalDesconto(const Value: Real);
     procedure setFTotalPromocoesUtilizadas(const Value: Integer);
 
+
   public
-    property TotalDesconto: Double read FTotalDesconto write setFTotalDesconto;
+    [FieldName('TotalDesconto')]
+    property TotalDesconto: Real read FTotalDesconto write setFTotalDesconto;
+
+    [FieldName('TotalPromocoesUtilizadas')]
     property TotalPromocoesUtilizadas: Integer read FTotalPromocoesUtilizadas write setFTotalPromocoesUtilizadas;
-    property PromocoesUtilizadas: TList<TStringList> read FPromocoesUtilizadas write setFPromocoesUtilizadas;
+
+    [FieldName('PromocoesUtilizadas')]
+    property PromocoesUtilizadas: TPromocoesUtilizadas read FPromocoesUtilizadas write setFPromocoesUtilizadas;
   end;
 
 implementation
 
 { TMGPedidoPromocoes }
 
-{ TMGPedidoPromocoes }
-
 procedure TMGPedidoPromocoes.setFPromocoesUtilizadas(
-  const Value: TList<TStringList>);
+  const Value: TPromocoesUtilizadas);
 begin
   FPromocoesUtilizadas := Value;
 end;
 
-procedure TMGPedidoPromocoes.setFTotalDesconto(const Value: Double);
+procedure TMGPedidoPromocoes.setFTotalDesconto(const Value: Real);
 begin
   FTotalDesconto := Value;
 end;

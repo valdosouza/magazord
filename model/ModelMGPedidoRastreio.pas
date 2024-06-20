@@ -11,7 +11,7 @@ type
   TMGPedidoRastreio = Class(TGenericEntity)
       type
       TPedidoItemArray = array of TMGPedidoItem;
-      TPedidoNotaFiscalItemArray = array of TMGPedidoNotaFiscal;
+      TPedidoNotaFiscalArray = array of TMGPedidoNotaFiscal;
   private
     FTransportadoraCodigoRastreioInterno: Boolean;
     FValorFrete: string;
@@ -28,7 +28,7 @@ type
     FCodigoRastreio: string;
     FPedidoSituacaoDescricaoDetalhada: string;
     FId: Integer;
-    FPedidoNotaFiscal: TPedidoNotaFiscalItemArray;
+    FPedidoNotaFiscal: TPedidoNotaFiscalArray;
     FTransportadoraAgenciaCodigoServico: string;
     FPedidoSituacaoEtapa: Integer;
     FDataLimitePostagem: TDateTime;
@@ -39,7 +39,7 @@ type
     FPedidoSituacaoTipo: Integer;
     FPedidoItem: TPedidoItemArray;
     FPedidoLojistaCodigo: string;
-    FTransportadoraServicoOpcoes: TStringList;
+    FTransportadoraServicoOpcoes: String;
     FTransportadoraServicoId: Integer;
     FPedidoSituacao: Integer;
     FTransportadoraAgenciaNome: string;
@@ -52,7 +52,7 @@ type
     procedure setFLojistaNome(const Value: string);
     procedure setFPedidoItem(const Value: TPedidoItemArray);
     procedure setFPedidoLo(const Value: string);
-    procedure setFPedidoNotaFiscal(const Value: TPedidoNotaFiscalItemArray);
+    procedure setFPedidoNotaFiscal(const Value: TPedidoNotaFiscalArray);
     procedure setFPedidoRastreioHistorico(const Value: String);
     procedure setFPedidoSituacao(const Value: Integer);
     procedure setFPedidoSituacaoDescricao(const Value: string);
@@ -67,7 +67,7 @@ type
     procedure setFTransportadoraNome(const Value: string);
     procedure setFTransportadoraServicoDescricao(const Value: string);
     procedure setFTransportadoraServicoId(const Value: Integer);
-    procedure setFTransportadoraServicoOpcoes(const Value: TStringList);
+    procedure setFTransportadoraServicoOpcoes(const Value: String);
     procedure setFTransportadoraServicoTipo(const Value: Integer);
     procedure setFTransportadoraTextoEntrega(const Value: string);
     procedure setFTransportadoraTipo(const Value: Integer);
@@ -75,42 +75,129 @@ type
     procedure setFValorFreteTransportadora(const Value: string);
 
   public
+    constructor Create;
+    destructor Destroy;
+    procedure setArrayPedidoItem(i:Integer);
+    procedure setArrayPedidoNotaFiscalItem(i:Integer);
+
+    [FieldName('Id')]
     property Id: Integer read FId write setFId;
+
+    [FieldName('ValorFrete')]
     property ValorFrete: string read FValorFrete write setFValorFrete;
+
+    [FieldName('ValorFreteTransportadora')]
     property ValorFreteTransportadora: string read FValorFreteTransportadora write setFValorFreteTransportadora;
+
+    [FieldName('DiasUteis')]
     property DiasUteis: Integer read FDiasUteis write setFDiasUteis;
+
+    [FieldName('CodigoRastreio')]
     property CodigoRastreio: string read FCodigoRastreio write setFCodigoRastreio;
+
+    [FieldName('Link')]
     property Link: string read FLink write setFLink;
+
+    [FieldName('DataLimiteEntregaCliente')]
     property DataLimiteEntregaCliente: TDateTime read FDataLimiteEntregaCliente write setFDataLimiteEntregaCliente;
+
+    [FieldName('DataLimitePostagem')]
     property DataLimitePostagem: TDateTime read FDataLimitePostagem write setFDataLimitePostagem;
+
+    [FieldName('Situacao')]
     property Situacao: Integer read FSituacao write setFSituacao;
+
+    [FieldName('TransportadoraServicoId')]
     property TransportadoraServicoId: Integer read FTransportadoraServicoId write setFTransportadoraServicoId;
-    property TransportadoraServicoOpcoes: TStringList read FTransportadoraServicoOpcoes write setFTransportadoraServicoOpcoes;
+
+    [FieldName('TransportadoraServicoOpcoes')]
+    property TransportadoraServicoOpcoes: String read FTransportadoraServicoOpcoes write setFTransportadoraServicoOpcoes;
+
+    [FieldName('TransportadoraServicoTipo')]
     property TransportadoraServicoTipo: Integer read FTransportadoraServicoTipo write setFTransportadoraServicoTipo;
+
+    [FieldName('TransportadoraServicoDescricao')]
     property TransportadoraServicoDescricao: string read FTransportadoraServicoDescricao write setFTransportadoraServicoDescricao;
+
+    [FieldName('TransportadoraTextoEntrega')]
     property TransportadoraTextoEntrega: string read FTransportadoraTextoEntrega write setFTransportadoraTextoEntrega;
+
+    [FieldName('TransportadoraAgenciaNome')]
     property TransportadoraAgenciaNome: string read FTransportadoraAgenciaNome write setFTransportadoraAgenciaNome;
+
+    [FieldName('TransportadoraAgenciaCodigoServico')]
     property TransportadoraAgenciaCodigoServico: string read FTransportadoraAgenciaCodigoServico write setFTransportadoraAgenciaCodigoServico;
+
+    [FieldName('TransportadoraId')]
     property TransportadoraId: Integer read FTransportadoraId write setFTransportadoraId;
+
+    [FieldName('TransportadoraNome')]
     property TransportadoraNome: string read FTransportadoraNome write setFTransportadoraNome;
+
+    [FieldName('TransportadoraTipo')]
     property TransportadoraTipo: Integer read FTransportadoraTipo write setFTransportadoraTipo;
+
+    [FieldName('TransportadoraCodigoRastreioInterno')]
     property TransportadoraCodigoRastreioInterno: Boolean read FTransportadoraCodigoRastreioInterno write setFTransportadoraCodigoRastreioInterno;
+
+    [FieldName('PedidoSituacao')]
     property PedidoSituacao: Integer read FPedidoSituacao write setFPedidoSituacao;
+
+    [FieldName('PedidoSituacaoEtapa')]
     property PedidoSituacaoEtapa: Integer read FPedidoSituacaoEtapa write setFPedidoSituacaoEtapa;
+
+    [FieldName('PedidoSituacaoTipo')]
     property PedidoSituacaoTipo: Integer read FPedidoSituacaoTipo write setFPedidoSituacaoTipo;
+
+    [FieldName('PedidoSituacaoDescricao')]
     property PedidoSituacaoDescricao: string read FPedidoSituacaoDescricao write setFPedidoSituacaoDescricao;
+
+    [FieldName('PedidoSituacaoDescricaoDetalhada')]
     property PedidoSituacaoDescricaoDetalhada: string read FPedidoSituacaoDescricaoDetalhada write setFPedidoSituacaoDescricaoDetalhada;
+
+    [FieldName('PedidoLojistaCodigo')]
     property PedidoLojistaCodigo: string read FPedidoLojistaCodigo write setFPedidoLo;
+
+    [FieldName('LojistaNome')]
     property LojistaNome: string read FLojistaNome write setFLojistaNome;
+
+    [FieldName('PedidoItem')]
     property PedidoItem: TPedidoItemArray read FPedidoItem write setFPedidoItem;
-    property PedidoNotaFiscal: TPedidoNotaFiscalItemArray read FPedidoNotaFiscal write setFPedidoNotaFiscal;
+
+    [FieldName('PedidoNotaFiscal')]
+    property PedidoNotaFiscal: TPedidoNotaFiscalArray read FPedidoNotaFiscal write setFPedidoNotaFiscal;
+
+    [FieldName('PedidoRastreioHistorico')]
     property PedidoRastreioHistorico: String read FPedidoRastreioHistorico write setFPedidoRastreioHistorico;
+
   end;
 
 implementation
 
 
 { TMGPedidoRastreio }
+
+constructor TMGPedidoRastreio.Create;
+begin
+  inherited;
+
+end;
+
+destructor TMGPedidoRastreio.Destroy;
+begin
+
+  inherited;
+end;
+
+procedure TMGPedidoRastreio.setArrayPedidoItem(i: Integer);
+begin
+  SetLength(FPedidoItem,I);
+end;
+
+procedure TMGPedidoRastreio.setArrayPedidoNotaFiscalItem(i: Integer);
+begin
+  SetLength(FPedidoNotaFiscal,I);
+end;
 
 procedure TMGPedidoRastreio.setFCodigoRastreio(const Value: string);
 begin
@@ -159,7 +246,7 @@ begin
 end;
 
 procedure TMGPedidoRastreio.setFPedidoNotaFiscal(
-  const Value: TPedidoNotaFiscalItemArray);
+  const Value: TPedidoNotaFiscalArray);
 begin
   FPedidoNotaFiscal := Value;
 end;
@@ -239,7 +326,7 @@ begin
 end;
 
 procedure TMGPedidoRastreio.setFTransportadoraServicoOpcoes(
-  const Value: TStringList);
+  const Value: String);
 begin
   FTransportadoraServicoOpcoes := Value;
 end;

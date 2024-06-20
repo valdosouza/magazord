@@ -11,7 +11,7 @@ type
   private
     FId: Integer;
     FNumero: Integer;
-    FValorTotal: Double;
+    FValorTotal: Real;
     FDataEmissao: TDateTime;
     FSituacao: Integer;
     FPedidoRastreioId: Integer;
@@ -30,25 +30,45 @@ type
     procedure setFSituacao(const Value: Integer);
     procedure setFSituacaoDescricao(const Value: string);
     procedure setFTipo(const Value: Integer);
-    procedure setFValorTotal(const Value: Double);
+    procedure setFValorTotal(const Value: Real);
 
   public
+    [FieldName('Id')]
     property Id: Integer read FId write setFId;
+
+    [FieldName('Numero')]
     property Numero: Integer read FNumero write setFNumero;
+
+    [FieldName('SerieLegal')]
     property SerieLegal: string read FSerieLegal write setFSerieLegal;
+
+    [FieldName('DataEmissao')]
     property DataEmissao: TDateTime read FDataEmissao write setFDataEmissao;
+
+    [FieldName('Chave')]
     property Chave: string read FChave write setFChave;
-    property ValorTotal: Double read FValorTotal write setFValorTotal;
+
+    [FieldName('ValorTotal')]
+    property ValorTotal: Real read FValorTotal write setFValorTotal;
+
+    [FieldName('Situacao')]
     property Situacao: Integer read FSituacao write setFSituacao;
+
+    [FieldName('Tipo')]
     property Tipo: Integer read FTipo write setFTipo;
+
+    [FieldName('CfopCodigo')]
     property CfopCodigo: Integer read FCfopCodigo write setFCfopCodigo;
+
+    [FieldName('SituacaoDescricao')]
     property SituacaoDescricao: string read FSituacaoDescricao write setFSituacaoDescricao;
+
+    [FieldName('PedidoRastreioId')]
     property PedidoRastreioId: Integer read FPedidoRastreioId write setFPedidoRastreioId;
+
   end;
 
 implementation
-
-{ TMGPedidoNotaFiscal }
 
 { TMGPedidoNotaFiscal }
 
@@ -102,7 +122,7 @@ begin
   FTipo := Value;
 end;
 
-procedure TMGPedidoNotaFiscal.setFValorTotal(const Value: Double);
+procedure TMGPedidoNotaFiscal.setFValorTotal(const Value: Real);
 begin
   FValorTotal := Value;
 end;
