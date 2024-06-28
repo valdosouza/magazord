@@ -29,7 +29,7 @@ type
 
 constructor TMGPedidoRetorno.create;
 begin
-  inherited;
+
   Fdata:= TMGPedido.Create;
 end;
 

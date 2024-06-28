@@ -14,7 +14,10 @@ uses
   ModelMGPedidoNotaFiscal in 'model\ModelMGPedidoNotaFiscal.pas',
   ModelMGPedidoItem in 'model\ModelMGPedidoItem.pas',
   ModelMGPedido in 'model\ModelMGPedido.pas',
-  ModelMGPedidoRetorno in 'model\ModelMGPedidoRetorno.pas';
+  ModelMGPedidoRetorno in 'model\ModelMGPedidoRetorno.pas',
+  ModelMGPedidoHeader in 'model\ModelMGPedidoHeader.pas',
+  ControllerMagazordApi in 'controller\ControllerMagazordApi.pas',
+  ModelMGPedidoHeaderRetorno in 'model\ModelMGPedidoHeaderRetorno.pas';
 
 {$R *.res}
 

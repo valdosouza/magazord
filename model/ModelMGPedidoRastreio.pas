@@ -179,7 +179,7 @@ implementation
 
 constructor TMGPedidoRastreio.Create;
 begin
-  inherited;
+
 
 end;
 

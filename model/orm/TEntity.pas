@@ -2,8 +2,11 @@ unit TEntity;
 
 interface
 
+uses
+  System.Classes;
+
 Type
-  TGenericEntity = class(TObject)
+  TGenericEntity = class(TComponent)
   end;
 
 implementation

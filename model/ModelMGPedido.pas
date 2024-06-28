@@ -406,8 +406,8 @@ implementation
 
 constructor TMGPedido.create;
 begin
-  inherited;
-  FPedidoPromocoes := TMGPedidoPromocoes.create;
+
+  FPedidoPromocoes := TMGPedidoPromocoes.create(Self);
 end;
 
 destructor TMGPedido.Destroy;

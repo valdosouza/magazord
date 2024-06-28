@@ -36,7 +36,7 @@ end;
 constructor TControllerGeral.Create(AOwner: TComponent);
 begin
   inherited;
-  Registro := TGeral.Create;
+  Registro := TGeral.Create(Self);
   Lista := TListaGeral.Create;
 end;
 
@@ -72,7 +72,7 @@ begin
       Lista.Clear;
       while not eof do
       Begin
-        LITem := TGeral.Create;
+        LITem := TGeral.Create(Self);
         get(Lc_Qry,LITem);
         Lista.add(LITem);
         next;
