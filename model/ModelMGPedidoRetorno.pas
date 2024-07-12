@@ -16,7 +16,7 @@ type
     procedure setFstatus(const Value: String);
 
   public
-    constructor Create(AOwner: TComponent);override;
+    constructor Create();override;
     destructor Destroy;override;
 
     property status :String read FStatus write setFStatus;
@@ -30,7 +30,7 @@ type
 constructor TMGPedidoRetorno.create;
 begin
   inherited;
-  Fdata:= TMGPedido.create(self);
+  Fdata:= TMGPedido.create;
 end;
 
 destructor TMGPedidoRetorno.Destroy;

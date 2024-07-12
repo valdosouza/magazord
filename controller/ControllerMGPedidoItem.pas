@@ -37,9 +37,9 @@ end;
 constructor TControllerMGPedidoItem.Create(AOwner: TComponent);
 begin
   inherited;
-  Registro := TMGPedidoItem.Create(Self);
+  Registro := TMGPedidoItem.Create;
   Lista := TListaMGPedidoItem.Create;
-  FParametros := TPrmMGPedidoItem.create(Self);
+  FParametros := TPrmMGPedidoItem.create;
 end;
 
 destructor TControllerMGPedidoItem.Destroy;
@@ -98,7 +98,7 @@ begin
       Lista.Clear;
       while not eof do
       Begin
-        Lc_item := TMGPedidoItem.Create(Self);
+        Lc_item := TMGPedidoItem.Create;
         get(Lc_Qry,Lc_item);
         Lista.add(Lc_item);
         next;

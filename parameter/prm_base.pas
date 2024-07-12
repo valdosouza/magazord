@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Classes;
 
 Type
-  TPrmBase = class(TComponent)
+  TPrmBase = class(TObject)
   private
     FUltimaAtualizacao: String;
     FLimite: String;
@@ -28,7 +28,7 @@ Type
     procedure setFTerminal(const Value: Integer);
 
   public
-    constructor Create(AOwner: TComponent); override;
+    constructor Create(); Virtual;
     destructor Destroy;override;
 
     procedure Clear;Virtual;
@@ -59,7 +59,7 @@ begin
   FEstabelecimento := 0;
 end;
 
-constructor TPrmBase.Create(AOwner: TComponent);
+constructor TPrmBase.Create();
 begin
   inherited ;
 end;

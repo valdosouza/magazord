@@ -6,9 +6,9 @@ uses
   System.Classes;
 
 Type
-  TGenericEntity = class(TComponent)
+  TGenericEntity = class(TObject)
   public
-    constructor Create(AOwner: TComponent); override;
+    constructor Create(); Virtual;
     destructor Destroy;override;
   end;
 
@@ -17,7 +17,7 @@ implementation
 
 { TGenericEntity }
 
-constructor TGenericEntity.create(AOwner: TComponent);
+constructor TGenericEntity.create();
 begin
   inherited;
 end;

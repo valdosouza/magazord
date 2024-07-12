@@ -10,7 +10,7 @@ Type
     FFieldName: TMGPedidoHeader;
     procedure setFFieldName(const Value: TMGPedidoHeader);
   public
-    constructor Create(AOwner: TComponent);override;
+    constructor Create;override;
     destructor Destroy;override;
 
     property FieldName : TMGPedidoHeader read FFieldName write setFFieldName;
@@ -23,7 +23,7 @@ implementation
 constructor TPrmMGPedidoHeader.Create;
 begin
   inherited;
-  FieldName := TMGPedidoHeader.Create(self);
+  FieldName := TMGPedidoHeader.Create;
 end;
 
 destructor TPrmMGPedidoHeader.Destroy;

@@ -5,7 +5,7 @@ interface
 uses STDatabase,Classes, Vcl.Grids,STQuery, SysUtils,ControllerBase, tblGeral,
      Generics.Collections,ModelMGPedido, prm_mg_pedido,FireDAC.Stan.Param,
      ControllerMGPedidoHistorico, ControllerMGPedidoItem,ControllerMGPedidoNotaFiscal,
-     ControllerMGPedidoPromocoes,ControllerMGPedidoRastreio;
+     ControllerMGPedidoPromocoes,ControllerMGPedidoRastreio,ControllerPedidoFromExterior;
 
 Type
   TListaMGPedido = TObjectList<TMGPedido>;
@@ -23,6 +23,7 @@ Type
     Promocoes : TControllerMGPedidoPromocoes;
     Rastreio : TControllerMGPedidoRastreio;
     Lista : TListaMGPedido;
+    FromExterior : TControllerPedidoFromExterior;
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     procedure Clear;
@@ -45,18 +46,20 @@ end;
 constructor TControllerMGPedido.Create(AOwner: TComponent);
 begin
   inherited;
-  Registro := TMGPedido.Create(Self);
+  Registro := TMGPedido.Create;
   Lista := TListaMGPedido.Create;
-  FParametros := TPrmMgPedido.create(Self);
+  FParametros := TPrmMgPedido.create;
   Item := TControllerMGPedidoItem.create(Self);
   Historico := TControllerMGPedidoHistorico.create(Self);
   NotaFiscal := TControllerMGPedidoNotaFiscal.create(Self);
   Promocoes := TControllerMGPedidoPromocoes.create(Self);
   Rastreio := TControllerMGPedidoRastreio.create(Self);
+  FromExterior := TControllerPedidoFromExterior.create(Self);
 end;
 
 destructor TControllerMGPedido.Destroy;
 begin
+  FreeAndNil(FromExterior);
   FreeAndNil(Rastreio);
   FreeAndNil(Promocoes);
   FreeAndNil(item);
@@ -156,7 +159,7 @@ begin
       Lista.Clear;
       while not eof do
       Begin
-        Lc_item := TMGPedido.Create(Self);
+        Lc_item := TMGPedido.Create;
         get(Lc_Qry,Lc_item);
         Lista.add(Lc_item);
         next;

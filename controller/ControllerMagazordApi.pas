@@ -44,7 +44,7 @@ implementation
 constructor TControllerMagazordApi.Create(AOwner: TComponent);
 begin
   inherited;
-  ListaPedido := TMGPedidoHeaderRetorno.Create(self);
+  ListaPedido := TMGPedidoHeaderRetorno.Create;
 end;
 
 destructor TControllerMagazordApi.Destroy;

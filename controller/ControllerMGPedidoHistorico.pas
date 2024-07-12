@@ -37,9 +37,9 @@ end;
 constructor TControllerMGPedidoHistorico.Create(AOwner: TComponent);
 begin
   inherited;
-  Registro := TMGPedidoHistorico.Create(Self);
+  Registro := TMGPedidoHistorico.Create;
   Lista := TListaMGPedidoHistorico.Create;
-  FParametros := TPrmMGPedidoHistorico.create(Self);
+  FParametros := TPrmMGPedidoHistorico.create;
 end;
 
 destructor TControllerMGPedidoHistorico.Destroy;
@@ -98,7 +98,7 @@ begin
       Lista.Clear;
       while not eof do
       Begin
-        Lc_item := TMGPedidoHistorico.Create(Self);
+        Lc_item := TMGPedidoHistorico.Create;
         get(Lc_Qry,Lc_item);
         Lista.add(Lc_item);
         next;

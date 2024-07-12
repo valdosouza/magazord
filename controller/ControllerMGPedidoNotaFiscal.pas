@@ -37,9 +37,9 @@ end;
 constructor TControllerMGPedidoNotaFiscal.Create(AOwner: TComponent);
 begin
   inherited;
-  Registro := TMGPedidoNotaFiscal.Create(Self);
+  Registro := TMGPedidoNotaFiscal.Create;
   Lista := TListaMGPedidoNotaFiscal.Create;
-  FParametros := TPrmMGPedidoNotaFiscal.create(Self);
+  FParametros := TPrmMGPedidoNotaFiscal.create;
 end;
 
 destructor TControllerMGPedidoNotaFiscal.Destroy;
@@ -98,7 +98,7 @@ begin
       Lista.Clear;
       while not eof do
       Begin
-        Lc_item := TMGPedidoNotaFiscal.Create(Self);
+        Lc_item := TMGPedidoNotaFiscal.Create;
         get(Lc_Qry,Lc_item);
         Lista.add(Lc_item);
         next;

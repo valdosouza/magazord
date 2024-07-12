@@ -11,7 +11,7 @@ Type
     procedure setFFieldName(const Value: TMGPedidoItem);
 
   public
-    constructor Create(AOwner: TComponent);override;
+    constructor Create();override;
     destructor Destroy;override;
 
     property FieldName : TMGPedidoItem read FFieldName write setFFieldName;
@@ -21,10 +21,10 @@ implementation
 
 { TPrmMGPedid0NotaFiscal }
 
-constructor TPrmMGPedidoNotaFiscal.Create(AOwner: TComponent);
+constructor TPrmMGPedidoNotaFiscal.Create();
 begin
   inherited;
-  FFieldName := TMGPedidoItem.Create(self);
+  FFieldName := TMGPedidoItem.Create;
 end;
 
 destructor TPrmMGPedidoNotaFiscal.Destroy;

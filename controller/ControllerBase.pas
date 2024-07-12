@@ -10,9 +10,11 @@ Type
   TControllerBase = Class(TComponent)
   private
     FDataBase: TSTDatabase;
-    procedure setFDataBase(const Value: TSTDatabase);
-  protected
 
+    procedure setFDataBase(const Value: TSTDatabase);
+    procedure setFOrderBy(const Value: String);
+  protected
+    FOrderBy: String;
 
     function clearObj<T: class>(Obj: T):Boolean;
     function insertObj<T: class>(Obj: T):Boolean;
@@ -53,6 +55,7 @@ Type
     { Published declarations }
     //Informa o banco de dados
     property DataBase : TSTDatabase read FDataBase write setFDataBase;
+    property OrderBy :String read FOrderBy write setFOrderBy;
   End;
 
 implementation
@@ -374,6 +377,11 @@ end;
 procedure TControllerBase.setFDataBase(const Value: TSTDatabase);
 begin
   FDataBase := Value;
+end;
+
+procedure TControllerBase.setFOrderBy(const Value: String);
+begin
+  FOrderBy := Value;
 end;
 
 procedure TControllerBase.setGenerator(Generator, Sequencia: String);

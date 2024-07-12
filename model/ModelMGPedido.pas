@@ -37,6 +37,7 @@ type
     FValorProduto: Real;
     FPedidoSituacaoDescricao: string;
     FPedidoHistorico: TPedidoHistoricoArray;
+    FArrayPedidoRastreio: TPedidoRastreioArray;
     FPedidoAnaliseRisco: String;
     FCuponTipoDesconto: Integer;
     FValorAcrescimo: Real;
@@ -83,7 +84,6 @@ type
     FGatewayPagamentoId: Integer;
     FLinkPagamento: string;
     FCodigoMarketplace: string;
-    FArrayPedidoRastreio: TPedidoRastreioArray;
     FPedidoSituacao: Integer;
     FCondicaoPagamentoParcelas: Integer;
     FLojaMarketplaceNome: string;
@@ -124,6 +124,7 @@ type
     procedure setFId_loja(const Value: Integer);
     procedure setFLinkAvaliacao(const Value: string);
     procedure setFLinkPagamento(const Value: string);
+    procedure setFLogradouro(const Value: string);
     procedure setFLojaDoMarketplaceId(const Value: Integer);
     procedure setFLojaDoMarketplaceNome(const Value: string);
     procedure setFLojaMarketplaceId(const Value: Integer);
@@ -171,7 +172,7 @@ type
     procedure setFValorTotalFinal(const Value: Real);
 
   public
-    constructor Create(AOwner: TComponent);Override;
+    constructor Create();Override;
     destructor Destroy;override;
 
     [KeyField('TB_INSTITUTION_ID')]
@@ -291,7 +292,7 @@ type
     property NomeDestinatario: string read FNomeDestinatario write setFNomeDestinatario;
 
     [FieldName('LOGRADOURO')]
-    property Logradouro: string read FLogradouro write setFNumero;
+    property Logradouro: string read FLogradouro write setFLogradouro;
 
     [FieldName('NUMERO')]
     property Numero: string read FNumero write setFNumero;
@@ -407,10 +408,10 @@ implementation
 
 { TMGPedido }
 
-constructor TMGPedido.create(AOwner: TComponent);
+constructor TMGPedido.create();
 begin
-  inherited create(AOwner);
-  FPedidoPromocoes := TMGPedidoPromocoes.create(Self);
+  inherited;
+  FPedidoPromocoes := TMGPedidoPromocoes.create;
 end;
 
 destructor TMGPedido.Destroy;
@@ -418,7 +419,6 @@ Begin
   FPedidoPromocoes.DisposeOf;
   inherited;
 end;
-
 
 procedure TMGPedido.setFArrayPedidoRastreio(const Value: TPedidoRastreioArray);
 begin
@@ -575,6 +575,11 @@ begin
   FLinkPagamento := Value;
 end;
 
+procedure TMGPedido.setFLogradouro(const Value: string);
+begin
+  FLogradouro := Value;
+end;
+
 procedure TMGPedido.setFLojaDoMarketplaceId(const Value: Integer);
 begin
   FLojaDoMarketplaceId := Value;
@@ -627,7 +632,7 @@ end;
 
 procedure TMGPedido.setFNumero(const Value: string);
 begin
-  FLogradouro := Value;
+  FNumero := Value;
 end;
 
 procedure TMGPedido.setFOrigem(const Value: Integer);
