@@ -22,6 +22,7 @@ interface
   function Fc_Month (Data : TDateTime) : Integer;
   function Fc_Year (Data : TDateTime) : Integer;
   Function Fc_BuscaTamArquivo(Lc_Arquivo : String) : Integer;
+  function RemoveAcento(const pText: string): string;
 
 implementation
 
@@ -492,6 +493,12 @@ begin
    end;
 end;
 
+function RemoveAcento(const pText: string): string;
+type
+  USAscii20127 = type AnsiString(20127);
+begin
+  Result := string(USAscii20127(pText));
+end;
 
 
 end.

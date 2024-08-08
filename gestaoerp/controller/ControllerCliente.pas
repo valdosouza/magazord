@@ -20,6 +20,7 @@ Type
     Vendedor : TControllerColaborador;
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
+    function insert:Boolean;
     function salva:boolean;
     function update:Boolean;
     procedure getById;
@@ -154,6 +155,16 @@ begin
   Finally
     FinalizaQuery(Lc_Qry);
   End;
+end;
+
+function TControllerCliente.insert: Boolean;
+begin
+  try
+    insertObj(Registro);
+    Result := True;
+  Except
+    Result := False;
+  end;
 end;
 
 procedure TControllerCliente.PreencheComboBox(Order:String;Cb: TComboBox);

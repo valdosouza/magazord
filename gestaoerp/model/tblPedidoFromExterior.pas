@@ -2,7 +2,7 @@ unit tblPedidoFromExterior;
 
 interface
 
-Uses GenericEntity,CAtribEntity, Classes, SysUtils;
+Uses GenericEntity,CAtribEntity;
 
 Type
   //nome da classe de entidade

@@ -10,6 +10,7 @@ uses
 
 
 type
+
   TBaseSearch = class(TFr_Base)
     Pnl_Fundo: TPanel;
     Pnl_Parametros: TPanel;

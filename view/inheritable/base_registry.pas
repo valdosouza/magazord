@@ -9,6 +9,7 @@ uses
   Vcl.DBCtrls, main;
 
 type
+
   TBaseRegistry = class(TFr_Base)
     pnl_botao: TPanel;
     pnl_fundo: TPanel;

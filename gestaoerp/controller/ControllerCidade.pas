@@ -47,8 +47,8 @@ begin
         Begin
         SQL.Add('select CDD_CODIGO '+
                 'FROM TB_CIDADE '+
-                'WHERE CDD_DESCRICAO=:CDD_DESCRICAO AND CDD_UF =:CDD_UF');
-        ParamByName('CDD_DESCRICAO').AsString := Descricao;
+                'WHERE UPPER(CDD_DESCRICAO) =:CDD_DESCRICAO AND CDD_UF =:CDD_UF');
+        ParamByName('CDD_DESCRICAO').AsString := UpperCase(Descricao);
         ParamByName('CDD_UF').AsString := UF;
         end;
       Active := True;

@@ -16,9 +16,6 @@ inherited TasConfig: TTasConfig
     BevelInner = bvRaised
     BevelOuter = bvLowered
     TabOrder = 0
-    ExplicitLeft = 8
-    ExplicitTop = -40
-    ExplicitHeight = 335
     object Lb_Url: TLabel
       AlignWithMargins = True
       Left = 5
@@ -147,8 +144,6 @@ inherited TasConfig: TTasConfig
     BevelInner = bvRaised
     BevelOuter = bvLowered
     TabOrder = 1
-    ExplicitTop = 335
-    ExplicitWidth = 927
     object SB_Gravar: TSpeedButton
       AlignWithMargins = True
       Left = 420
@@ -192,7 +187,7 @@ inherited TasConfig: TTasConfig
       ExplicitTop = 6
     end
   end
-  inherited Menu: TMainMenu
+  inherited MnuBase: TMainMenu
     Left = 704
   end
 end
