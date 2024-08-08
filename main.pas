@@ -14,9 +14,11 @@ uses
   ModelMGPedidoRastreio,
   ModelMGPedidoHeader,
   un_variables,
+  ControllerMGPedido,
   ControllerMGPedidoHeader, Un_Base, base_search, Data.DB,
   Datasnap.DBClient, Vcl.Buttons, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
   Datasnap.Provider, Vcl.ComCtrls, tas_config;
+
 
 type
   TFrMain = class(TBaseSearch)
@@ -54,12 +56,15 @@ type
     AtualizarMdulo1: TMenuItem;
     cds_searchTB_INSTITUTION_ID: TIntegerField;
     Configuraes1: TMenuItem;
+    Button1: TButton;
     procedure ChBx_PeriodoClick(Sender: TObject);
     procedure AtualizarMdulo1Click(Sender: TObject);
     procedure Configuraes1Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
-
+    function getVariableGestao:boolean;
     procedure SolicitaAtualizacao;
+
   protected
     procedure CriarVariaveis;Override;
     procedure FinalizaVariaveis;Override;
@@ -93,6 +98,34 @@ begin
   SolicitaAtualizacao;
 end;
 
+procedure TFrMain.Button1Click(Sender: TObject);
+var
+  f:TextFile; Linha:String;
+  Lc_memo : TMemo;
+  Lc_Pedido : TMGPedidoRetorno;
+  Codigo : String;
+begin
+  Lc_memo := TMemo.Create(self);
+  Lc_memo.Parent := self;
+  AssignFile(f, 'D:\temp\pedido.txt');
+  Reset(f);
+  While not Eof(f) do
+  Begin
+    Readln(f, Linha);
+    Lc_memo.Lines.Add(Linha)
+  End;
+  CloseFile(f);
+  try
+    Lc_Pedido := TJson.JsonToObject<TMGPedidoRetorno>(Lc_memo.Text);
+    Codigo := Lc_Pedido.data.Codigo;
+  Except
+    on E: Exception do
+    Begin
+      ShowMessage('Erro: ' + E.Message );
+    End;
+  end;
+end;
+
 procedure TFrMain.ChBx_PeriodoClick(Sender: TObject);
 begin
   inherited;
@@ -113,12 +146,29 @@ begin
 end;
 
 procedure TFrMain.CriarVariaveis;
+begin
+  inherited;
+  if not getVariableGestao then
+  Begin
+    Self.Close;
+    Application.Terminate;
+  end;
+end;
+
+procedure TFrMain.FinalizaVariaveis;
+begin
+  inherited;
+  FreeAndNil(MGPedidoheader);
+  FreeAndNil(MGApi);
+end;
+
+function TFrMain.getVariableGestao:boolean;
 var
   Lc_Arq_Ini: TIniFile;
   Lc_Aux : String;
 begin
-  inherited;
   Lc_Arq_Ini := TIniFile.Create(ExtractFilePath(Application.ExeName)+'autentica.txt');
+  Result := True;
   Try
     MGPedidoheader := TControllerMGPedidoHeaderRetorno.Create(self);
     if FileExists(ExtractFilePath(Application.ExeName)+'autentica.txt') then
@@ -134,15 +184,21 @@ begin
       Lc_Aux := Lc_Arq_Ini.ReadString('GESTAO', 'VENDEDOR','');
       Lc_Aux := Fc_Base64Decode(Lc_Aux);
       Gb_Cd_Vendedor := StrToIntDef(Lc_Aux,0);
+
+      Lc_Aux := Lc_Arq_Ini.ReadString('GESTAO', 'ESTOQUE','');
+      Lc_Aux := Fc_Base64Decode(Lc_Aux);
+      Gb_cd_Estoque := StrToIntDef(Lc_Aux,0);
+
     End;
   Finally
     Lc_Arq_Ini.DisposeOf;
     DeleteFile(ExtractFilePath(Application.ExeName)+'autentica.txt')
   End;
   {$IFDEF DEBUG}
-    Gb_CodMha := 1;
-    Gb_Cd_Usuario := 1;
-    Gb_Cd_Vendedor := 1;
+    Gb_CodMha := 27;
+    Gb_Cd_Usuario := 3;
+    Gb_Cd_Vendedor := 2;
+    Gb_cd_Estoque := 1;
   {$ENDIF }
   if not ((Gb_Cd_Usuario > 0) AND (Gb_CodMha > 0)) then
   Begin
@@ -150,17 +206,8 @@ begin
                    'Erro ao executar esse programa.'+EOLN+
                    'A executação deve ser feita através do Gestão.'+EOLN,
                    ['OK'],[bEscape],mpAlerta);
-    Self.Close;
-    Application.Terminate;
+    result := False;
   end;
-
-end;
-
-procedure TFrMain.FinalizaVariaveis;
-begin
-  inherited;
-  FreeAndNil(MGPedidoheader);
-  FreeAndNil(MGApi);
 end;
 
 procedure TFrMain.GetView;
@@ -210,31 +257,31 @@ begin
     for I := 0 to MGPedidoheader.Lista.Count -1 do
     Begin
       cds_search.Append;
-      cds_searchTB_INSTITUTION_ID.AsInteger := MGPedidoheader.Lista[I].Estabelecimento;
-      cds_searchID.AsInteger :=  MGPedidoheader.Lista[I].Id;
-      cds_searchCODIGO.AsString := MGPedidoheader.Lista[I].Codigo;
-      cds_searchCODIGO_MARKETPLACE.AsString := MGPedidoheader.Lista[I].CodigoMarketplace;
-      cds_searchDATA_HORA.AsString := MGPedidoheader.Lista[I].DataHora;
-      cds_searchVALOR_PRODUTO.AsFloat := MGPedidoheader.Lista[I].ValorProduto;
-      cds_searchVALOR_FRETE.AsFloat := MGPedidoheader.Lista[I].ValorFrete;
-      cds_searchVALOR_DESCONTO.AsFloat := MGPedidoheader.Lista[I].ValorDesconto;
-      cds_searchVALOR_ACRESCIMO.AsFloat := MGPedidoheader.Lista[I].ValorAcrescimo;
-      cds_searchVALOR_TOTAL.AsFloat := MGPedidoheader.Lista[I].ValorTotal;
-      cds_searchPESSOA_ID.AsInteger := MGPedidoheader.Lista[I].PessoaId;
-      cds_searchPESSOA_NOME.AsString := MGPedidoheader.Lista[I].PessoaNome;
-      cds_searchPESSOA_CPF_CNPJ.AsString := MGPedidoheader.Lista[I].PessoaCpfCnpj;
-      cds_searchFORMA_PAGAMENTO_ID.AsInteger := MGPedidoheader.Lista[I].FormaPagamentoId;
-      cds_searchFORMA_PAGAMENTO_NOME.AsString := MGPedidoheader.Lista[I].FormaPagamentoNome;
-      cds_searchFORMA_RECEBIMENTO_ID.AsInteger :=  MGPedidoheader.Lista[I].FormaRecebimentoId;
-      cds_searchFORMA_RECEBIMENTO_NOME.AsString := MGPedidoheader.Lista[I].FormaRecebimentoNome;
-      cds_searchCONDICAO_PAGAMENTO_ID.AsInteger := MGPedidoheader.Lista[I].CondicaoPagamentoId;
-      cds_searchCONDICAO_PAGAMENTO_NOME.AsString := MGPedidoheader.Lista[I].CondicaoPagamentoNome;
-      cds_searchPEDIDO_SITUACAO.AsInteger := MGPedidoheader.Lista[I].PedidoSituacao;
-      cds_searchPEDIDO_SITUACAO_DESCRICAO.AsString := MGPedidoheader.Lista[I].PedidoSituacaoDescricao;
-      cds_searchPEDIDO_SITUACAO_TIPO.AsInteger := MGPedidoheader.Lista[I].PedidoSituacaoTipo;
-      cds_searchLOJA_ID.AsInteger := MGPedidoheader.Lista[I].LojaId;
-      cds_searchLOJA_DO_MARKETPLACE_ID.AsInteger := MGPedidoheader.Lista[I].LojaDoMarketplaceId;
-      cds_searchLOJA_DO_MARKETPLACE_NOME.AsString := MGPedidoheader.Lista[I].LojaDoMarketplaceNome;
+      cds_searchTB_INSTITUTION_ID.AsInteger         := MGPedidoheader.Lista[I].Estabelecimento;
+      cds_searchID.AsInteger                        :=  MGPedidoheader.Lista[I].Id;
+      cds_searchCODIGO.AsString                     := MGPedidoheader.Lista[I].Codigo;
+      cds_searchCODIGO_MARKETPLACE.AsString         := MGPedidoheader.Lista[I].CodigoMarketplace;
+      cds_searchDATA_HORA.AsString                  := MGPedidoheader.Lista[I].DataHora;
+      cds_searchVALOR_PRODUTO.AsFloat               := MGPedidoheader.Lista[I].ValorProduto;
+      cds_searchVALOR_FRETE.AsFloat                 := MGPedidoheader.Lista[I].ValorFrete;
+      cds_searchVALOR_DESCONTO.AsFloat              := MGPedidoheader.Lista[I].ValorDesconto;
+      cds_searchVALOR_ACRESCIMO.AsFloat             := MGPedidoheader.Lista[I].ValorAcrescimo;
+      cds_searchVALOR_TOTAL.AsFloat                 := MGPedidoheader.Lista[I].ValorTotal;
+      cds_searchPESSOA_ID.AsInteger                 := MGPedidoheader.Lista[I].PessoaId;
+      cds_searchPESSOA_NOME.AsString                := UpperCase( MGPedidoheader.Lista[I].PessoaNome );
+      cds_searchPESSOA_CPF_CNPJ.AsString            := MGPedidoheader.Lista[I].PessoaCpfCnpj;
+      cds_searchFORMA_PAGAMENTO_ID.AsInteger        := MGPedidoheader.Lista[I].FormaPagamentoId;
+      cds_searchFORMA_PAGAMENTO_NOME.AsString       := UpperCase( MGPedidoheader.Lista[I].FormaPagamentoNome );
+      cds_searchFORMA_RECEBIMENTO_ID.AsInteger      := MGPedidoheader.Lista[I].FormaRecebimentoId;
+      cds_searchFORMA_RECEBIMENTO_NOME.AsString     := UpperCase( MGPedidoheader.Lista[I].FormaRecebimentoNome );
+      cds_searchCONDICAO_PAGAMENTO_ID.AsInteger     := MGPedidoheader.Lista[I].CondicaoPagamentoId;
+      cds_searchCONDICAO_PAGAMENTO_NOME.AsString    := UpperCase( MGPedidoheader.Lista[I].CondicaoPagamentoNome );
+      cds_searchPEDIDO_SITUACAO.AsInteger           := MGPedidoheader.Lista[I].PedidoSituacao;
+      cds_searchPEDIDO_SITUACAO_DESCRICAO.AsString  := UpperCase( MGPedidoheader.Lista[I].PedidoSituacaoDescricao );
+      cds_searchPEDIDO_SITUACAO_TIPO.AsInteger      := MGPedidoheader.Lista[I].PedidoSituacaoTipo;
+      cds_searchLOJA_ID.AsInteger                   := MGPedidoheader.Lista[I].LojaId;
+      cds_searchLOJA_DO_MARKETPLACE_ID.AsInteger    := MGPedidoheader.Lista[I].LojaDoMarketplaceId;
+      cds_searchLOJA_DO_MARKETPLACE_NOME.AsString   := UpperCase( MGPedidoheader.Lista[I].LojaDoMarketplaceNome );
       cds_search.Post;
     End;
     inherited;
@@ -250,6 +297,8 @@ Var
 begin
   Try
     ProcessoAguarde('I');
+    MGApi.DataInicial := DateToStr(E_Data_Ini.Date);
+    MGApi.DataFinal   := DateToStr(E_Data_Fim.Date);
     MGApi.getPedidosHeader;
     for I := 0 to hIGH(MGApi.ListaPedido.data.Items) do
     Begin
@@ -260,6 +309,10 @@ begin
     End;
   Finally
     ProcessoAguarde('F');
+    Search;
+    MensagemPadrao('Mensagem','A T E N Ç Ã O!.'+EOLN+EOLN+
+                   'Sincronia efetuado com sucesso.'+EOLN+EOLN,
+                   ['OK'],[bEscape],mpInformacao);
   End;
 end;
 

@@ -20,7 +20,6 @@ inherited BaseRegistry: TBaseRegistry
     BevelInner = bvRaised
     BevelOuter = bvLowered
     TabOrder = 0
-    ExplicitTop = 357
     object SB_Inserir: TSpeedButton
       AlignWithMargins = True
       Left = 188

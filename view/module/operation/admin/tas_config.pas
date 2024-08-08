@@ -8,6 +8,7 @@ uses
   Vcl.Menus, Vcl.Buttons;
 
 type
+
   TTasConfig = class(TFr_Base)
     Pnl_body: TPanel;
     pnl_Bottom: TPanel;

@@ -3,8 +3,8 @@ unit ControllerPedidoFromExterior;
 interface
 
 uses Classes, SysUtils,ControllerBase,tblPedidoFromExterior, Generics.Collections;
-Type
 
+Type
   TControllerPedidoFromExterior = Class(TControllerBase)
   private
 

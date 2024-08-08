@@ -138,7 +138,7 @@ begin
       sql.add(concat(
               'UPDATE TB_GERAL SET ',
               'GRL_CAMPO =:GRL_CAMPO, ',
-              'GRL_CONTEUDO =:GRL_CONTEUDO, ',
+              'GRL_CONTEUDO =:GRL_CONTEUDO ',
               'Where ( GRL_CAMPO =:GRL_CAMPO) AND ( GRL_CODMHA =:GRL_CODMHA ) '
       ));
       ParamByName('GRL_CAMPO').AsString := Registro.Campo;

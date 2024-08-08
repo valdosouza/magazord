@@ -5,7 +5,8 @@ interface
 uses STDatabase,Classes, Vcl.Grids,STQuery, SysUtils,ControllerBase, tblGeral,
      Generics.Collections,ModelMGPedido, prm_mg_pedido,FireDAC.Stan.Param,
      ControllerMGPedidoHistorico, ControllerMGPedidoItem,ControllerMGPedidoNotaFiscal,
-     ControllerMGPedidoPromocoes,ControllerMGPedidoRastreio,ControllerPedidoFromExterior;
+     ControllerMGPedidoPromocoes,ControllerMGPedidoRastreio,ControllerPedidoFromExterior,
+     ControllerMGPedidoBoleto;
 
 Type
   TListaMGPedido = TObjectList<TMGPedido>;
@@ -21,6 +22,7 @@ Type
     NotaFiscal : TControllerMGPedidoNotaFiscal;
     Historico : TControllerMGPedidoHistorico;
     Promocoes : TControllerMGPedidoPromocoes;
+    Boleto : TControllerMGPedidoBoleto;
     Rastreio : TControllerMGPedidoRastreio;
     Lista : TListaMGPedido;
     FromExterior : TControllerPedidoFromExterior;
@@ -54,11 +56,13 @@ begin
   NotaFiscal := TControllerMGPedidoNotaFiscal.create(Self);
   Promocoes := TControllerMGPedidoPromocoes.create(Self);
   Rastreio := TControllerMGPedidoRastreio.create(Self);
+  Boleto := TControllerMGPedidoBoleto.create(Self);
   FromExterior := TControllerPedidoFromExterior.create(Self);
 end;
 
 destructor TControllerMGPedido.Destroy;
 begin
+  FreeAndNil(Boleto);
   FreeAndNil(FromExterior);
   FreeAndNil(Rastreio);
   FreeAndNil(Promocoes);

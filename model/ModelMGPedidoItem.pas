@@ -156,7 +156,7 @@ type
     [FieldName('Ean')]
     property Ean: string read FEan write setFEan;
 
-    [FieldName('PRODUTO_DERIVACAO_NOME  ')]
+    [FieldName('PRODUTO_DERIVACAO_NOME')]
     property ProdutoDerivacaoNome: string read FProdutoDerivacaoNome write setFProdutoDerivacaoNome;
 
     [FieldName('MARCA_NOME')]

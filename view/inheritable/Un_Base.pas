@@ -10,8 +10,9 @@ uses
   FireDAC.Stan.Param,IniFiles, un_variables,ControllerMagazordApi;
 
 type
+
   TFr_Base = class(TForm)
-    Menu: TMainMenu;
+    MnuBase: TMainMenu;
     arefas1: TMenuItem;
     Sair1: TMenuItem;
     procedure FormShow(Sender: TObject);

@@ -4,7 +4,8 @@ interface
 
 uses
   JSON.Types, GenericEntity, System.Classes, System.Generics.Collections, ModelMGPedidoHistorico,
-  ModelMGPedidoPromocoes, ModelMGPedidoRastreio,CAtribEntity;
+  ModelMGPedidoPromocoes, ModelMGPedidoRastreio,CAtribEntity,
+  ModelMGPedidoTrackingParams, ModelMGPedidoBoleto;
 
 type
   [TableName('TB_MG_PEDIDOS')]
@@ -12,12 +13,11 @@ type
     type
       TPedidoRastreioArray  = array of TMGPedidoRastreio;
       TPedidoHistoricoArray = array of TMGPedidoHistorico;
-      TBoletosArray = array of String;
+      TBoletosArray = array of TMGPedidoBoleto;
       TTagsArray = array of String;
       TBloqueiosArray = array of String;
   private
     FLinkAvaliacao: string;
-    FPedidoTrackingParams: string;
     FLogradouro: string;
     FCondicaoPagamentoNome: string;
     FPessoaSexo: Integer;
@@ -93,6 +93,7 @@ type
     FNomeDestinatario: string;
     FDataPreVenda: TDateTime;
     FMarketplaceId: Integer;
+    FPedidoTrackingParams: TMGPedidoTrackingParams;
     procedure setFArrayPedidoRastreio(const Value: TPedidoRastreioArray);
     procedure setFBairro(const Value: string);
     procedure setFBloqueios(const Value: TBloqueiosArray);
@@ -149,7 +150,6 @@ type
     procedure setFPedidoSituacaoDescricaoDetalhada(const Value: string);
     procedure setFPedidoSituacaoEtapa(const Value: Integer);
     procedure setFPedidoSituacaoTipo(const Value: Integer);
-    procedure setFPedidoTrackingParams(const Value: string);
     procedure setFPedidoTrackingSource(const Value: string);
     procedure setFPedidoTrackingUserAgent(const Value: string);
     procedure setFPessoaCpfCnpj(const Value: string);
@@ -170,6 +170,7 @@ type
     procedure setFValorProduto(const Value: Real);
     procedure setFValorTotal(const Value: Real);
     procedure setFValorTotalFinal(const Value: Real);
+    procedure setFPedidoTrackingParams(const Value: TMGPedidoTrackingParams);
 
   public
     constructor Create();Override;
@@ -322,7 +323,7 @@ type
     property PedidoTrackingUserAgent: string read FPedidoTrackingUserAgent write setFPedidoTrackingUserAgent;
 
     [FieldName('PEDIDO_TRACKING_PARAMS')]
-    property PedidoTrackingParams: string read FPedidoTrackingParams write setFPedidoTrackingParams;
+    property PedidoTrackingParams: TMGPedidoTrackingParams read FPedidoTrackingParams write setFPedidoTrackingParams;
 
     [FieldName('CUPOM_CODIGO')]
     property CupomCodigo: string read FCuponCodigo write setFCuponCodigo;
@@ -700,7 +701,9 @@ begin
   FPedidoSituacaoTipo := Value;
 end;
 
-procedure TMGPedido.setFPedidoTrackingParams(const Value: string);
+
+procedure TMGPedido.setFPedidoTrackingParams(
+  const Value: TMGPedidoTrackingParams);
 begin
   FPedidoTrackingParams := Value;
 end;

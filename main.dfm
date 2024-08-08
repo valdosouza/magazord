@@ -286,8 +286,19 @@ inherited FrMain: TFrMain
       ParentFont = False
       TabOrder = 3
     end
+    object Button1: TButton
+      Left = 808
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = 'Teste '
+      Enabled = False
+      TabOrder = 5
+      Visible = False
+      OnClick = Button1Click
+    end
   end
-  inherited Menu: TMainMenu
+  inherited MnuBase: TMainMenu
     Left = 8
     Top = 176
     inherited arefas1: TMenuItem
@@ -303,6 +314,7 @@ inherited FrMain: TFrMain
   end
   inherited cds_search: TClientDataSet
     ProviderName = ''
+    Top = 186
     object cds_searchTB_INSTITUTION_ID: TIntegerField
       FieldKind = fkCalculated
       FieldName = 'TB_INSTITUTION_ID'

@@ -897,6 +897,22 @@ inherited TasMgPedido: TTasMgPedido
           end
         end
       end
+      object TabSheet2: TTabSheet
+        Caption = 'Observa'#231#245'es'
+        ImageIndex = 2
+        object E_Note: TMemo
+          Left = 0
+          Top = 0
+          Width = 1050
+          Height = 345
+          Align = alClient
+          TabOrder = 0
+          ExplicitLeft = 232
+          ExplicitTop = 240
+          ExplicitWidth = 185
+          ExplicitHeight = 89
+        end
+      end
     end
     object E_Forma_recebimento: TEdit
       AlignWithMargins = True
@@ -987,7 +1003,7 @@ inherited TasMgPedido: TTasMgPedido
       ExplicitHeight = 54
     end
   end
-  inherited Menu: TMainMenu
+  inherited MnuBase: TMainMenu
     Left = 160
     Top = 304
   end

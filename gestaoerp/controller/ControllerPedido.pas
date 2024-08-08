@@ -2,7 +2,7 @@ unit ControllerPedido;
 
 interface
 uses  ACBrUtil.Math,Classes, SysUtils,ControllerBase,  tblPedido ,Un_MSg,Datasnap.DBClient,
-      ControllerEmpresa,ControllerEndereco, ControllerCliente,FireDAC.Stan.Param,
+      ControllerEndereco, ControllerCliente,FireDAC.Stan.Param,
       ControllerItensNFL, Generics.Collections, ControllerParcelamento,
       ControllerColaborador, System.Math,  ControllerFormaPagamento,
       ControllerCtrlEstoque, STQuery;
@@ -18,7 +18,6 @@ Type
     Registro : TPedido;
     Lista: TListaPedido;
     UsuarioIntegracao : Integer;
-    Empresa : TControllerEmpresa;
     Endereco : TControllerEndereco;
     Cliente : TcontrollerCliente;
     Itens : TControllerItensNFL;
@@ -245,7 +244,6 @@ procedure TControllerPedido.Clear;
 begin
   clearObj(registro);
   Lista.Clear;
-  Empresa.clear;
   Endereco.clear;
   Cliente.clear;
   Itens.clear;
@@ -258,7 +256,6 @@ begin
   inherited;
   Registro  := TPedido.Create;
   Lista     := TListaPedido.Create;
-  Empresa   := TControllerEmpresa.create(Self);
   Endereco  := TControllerEndereco.create(Self);
   Itens     := TControllerItensNFL.create(Self);
   Parcelamento := TControllerParcelamento.create(Self);
@@ -322,7 +319,7 @@ Begin
       with Lc_Qry do
       Begin
         sql.Clear;
-        sql.Add('DELETE FROM TB_ITENS_NFL WHERE PED_CODIGO=:PED_CODIGO');
+        sql.Add('DELETE FROM TB_ITENS_NFL WHERE ITF_CODPED=:PED_CODIGO');
         ParamByName('PED_CODIGO').AsInteger := Registro.Codigo;
         ExecSQL;
       End;
@@ -374,7 +371,6 @@ begin
   Cliente.DisposeOf;
   Registro.DisposeOf;
   Lista.DisposeOf;
-  Empresa.DisposeOf;
   Endereco.DisposeOf;
   Itens.DisposeOf;
   Parcelamento.DisposeOf;
@@ -677,11 +673,9 @@ function TControllerPedido.getAll: Boolean;
 begin
   Result := True;
   _getByKey(Registro);
-  Empresa.Registro.Codigo := Self.Registro.Empresa;
-  Empresa.getAllBykey;
 
   Cliente.Registro.Codigo := Self.Registro.Empresa;
-  Cliente.getById;
+  Cliente.getallByKey;
 
   Endereco.Registro.Codigo        := Self.Registro.Endereco;
   Endereco.Registro.CodigoEmpresa := Self.Registro.Empresa;

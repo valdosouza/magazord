@@ -13,16 +13,18 @@ type
   TControllerMagazordApi = Class(TComponent)
   private
     FResponse: IResponse;
-    FDataeHora: String;
     FCodigoPedido: String;
     FPassword: String;
     FURL: String;
     FUser: String;
-    procedure setFDataeHora(const Value: String);
+    FDataFinal: String;
+    FDataInicial: String;
     procedure setFCodigoPedido(const Value: String);
     procedure setFPassword(const Value: String);
     procedure setFURL(const Value: String);
     procedure setFUser(const Value: String);
+    procedure setFDataFinal(const Value: String);
+    procedure setFDataInicial(const Value: String);
   public
     ListaPedido : TMGPedidoHeaderRetorno;
     Pedido : TMGPedidoRetorno;
@@ -34,7 +36,8 @@ type
     property URL : String read FURL write setFURL;
     property User : String read FUser write setFUser;
     property Password : String read FPassword write setFPassword;
-    property DataeHora : String read FDataeHora write setFDataeHora;
+    property DataInicial : String read FDataInicial write setFDataInicial;
+    property DataFinal : String read FDataFinal write setFDataFinal;
     property CodigoPedido : String read FCodigoPedido write setFCodigoPedido;
   End;
 implementation
@@ -57,20 +60,12 @@ procedure TControllerMagazordApi.getPedido;
 Var
   Lc_request : IRequest;
 begin
-  Try
-    Try
-      Lc_request := TRequest.New.BaseURL(concat(FUrl , '/v2/site/pedido/',FCodigoPedido))
-                    .ContentType('application/json')
-                    .Accept('application/json')
-                    .BasicAuthentication(FUser,FPassword);
-      FResponse := Lc_request.Get;
-      Pedido := TJson.JsonToObject<TMGPedidoRetorno>(FResponse.Content);
-    Except
-
-    End;
-  Finally
-
-  End;
+  Lc_request := TRequest.New.BaseURL(concat(FUrl , '/v2/site/pedido/',FCodigoPedido))
+                .ContentType('application/json')
+                .Accept('application/json')
+                .BasicAuthentication(FUser,FPassword);
+  FResponse := Lc_request.Get;
+  Pedido := TJson.JsonToObject<TMGPedidoRetorno>(FResponse.Content);
 
 end;
 
@@ -84,11 +79,15 @@ begin
                     .ContentType('application/json')
                     .Accept('application/json')
                     .BasicAuthentication(FUser,FPassword);
-      if FDataeHora <> '' then
+      if FDataInicial <> '' then
       Begin
-        Lc_request. AddParam('dataHora[gte]', FDataeHora);//menor ou igual a data
-        Lc_request. AddParam('dataHora[lte]', FDataeHora);//menor ou igual a data
+        Lc_request. AddParam('dataHora[gte]', FDataInicial);//maior ou igual a data
       End;
+      if FDataFinal <> '' then
+      Begin
+        Lc_request. AddParam('dataHora[lte]', FDataFinal);//menor ou igual a data
+      End;
+
       FResponse := Lc_request.Get;
       ListaPedido := TJson.JsonToObject<TMGPedidoHeaderRetorno>(FResponse.Content);
     Except
@@ -97,11 +96,6 @@ begin
   Finally
 
   End;
-end;
-
-procedure TControllerMagazordApi.setFDataeHora(const Value: String);
-begin
-  FDataeHora := Value;
 end;
 
 procedure TControllerMagazordApi.setFPassword(const Value: String);
@@ -122,6 +116,18 @@ end;
 procedure TControllerMagazordApi.setFCodigoPedido(const Value: String);
 begin
   FCodigoPedido := Value;
+end;
+
+procedure TControllerMagazordApi.setFDataFinal(const Value: String);
+begin
+  //Formato esperado "YYYY-MM-DDThh:mm:ssZ" ou "YYYY-MM-DD"  - DD-MM-YYYY
+  FDataFinal := concat(Copy(Value,7,4),'-',Copy(Value,4,2),'-',Copy(Value,1,2));
+end;
+
+procedure TControllerMagazordApi.setFDataInicial(const Value: String);
+begin
+  //Formato esperado "YYYY-MM-DDThh:mm:ssZ" ou "YYYY-MM-DD"  - DD-MM-YYYY
+  FDataInicial := concat(Copy(Value,7,4),'-',Copy(Value,4,2),'-',Copy(Value,1,2));
 end;
 
 end.

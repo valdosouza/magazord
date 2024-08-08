@@ -80,12 +80,24 @@ begin
                       'WHERE ID IS NOT NULL '
       ));
       //Agrega SQÇl
+      if Parametros.Estabelecimento > 0 then
+        sql.add(' AND (TB_INSTITUTION_ID =:TB_INSTITUTION_ID)');
+
+      if Parametros.FieldName.PedidoMagazord > 0 then
+        sql.add(' AND (TB_MG_PEDIDO_ID =:TB_MG_PEDIDO_ID)');
+
       if Parametros.Periodo then
       Begin
         sql.add(' AND (DATA_HORA BETWEEN :DATAINI  AND :DATAFIM)');
       End;
 
       //PAssagem de PArametros
+      if Parametros.Estabelecimento > 0 then
+        ParamByName('TB_INSTITUTION_ID').AsInteger:= Parametros.Estabelecimento;
+
+      if Parametros.FieldName.PedidoMagazord > 0 then
+        ParamByName('TB_MG_PEDIDO_ID').AsInteger:= Parametros.FieldName.PedidoMagazord;
+
       if Parametros.Periodo then
       Begin
         ParamByName('DATAINI').AsDateTime := StrToDateTime(formatdatetime('dd/MM/yyyy', Parametros.DataInicial)+' 00:00');

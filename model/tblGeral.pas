@@ -17,6 +17,7 @@ Type
     procedure setFCONTEUDO( Value :String);
     procedure setFCODMHA( Value :Integer);
   public
+
     [KeyField('GRL_CAMPO')]
     [FieldName('GRL_CAMPO')]
     property Campo: String read FCAMPO write setFCAMPO;

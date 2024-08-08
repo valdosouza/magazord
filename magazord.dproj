@@ -65,7 +65,7 @@
         <DCC_DcpOutput>..\Modelos\TempMagazord\</DCC_DcpOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
-        <DCC_UsePackage>DBXSqliteDriver;DataSnapServerMidas;DBXDb2Driver;DBXInterBaseDriver;pkgADRIFood;vclactnband;ACBr_TEFD;vclFireDAC;svnui;tethering;uniGUI25Chart;FireDACADSDriver;frxe25;DBXMSSQLDriver;ACBr_MDFeDamdfeRL;DatasnapConnectorsFreePascal;FireDACMSSQLDriver;vcltouch;ACBr_NFe;vcldb;Intraweb;svn;bindcompfmx;DBXOracleDriver;fsIBX25;inetdb;ACBr_NFeDanfeESCPOS;ACBr_Diversos;ACBr_PAFNFCe;FmxTeeUI;emsedge;fmx;fmxdae;frxDB25;vclib;frxTee25;FireDACDBXDriver;dbexpress;IndyCore;vclx;dsnap;DataSnapCommon;fsTee25;ACBr_PCNComum;ACBr_NFSeX;DataSnapConnectors;uniGUI25m;VCLRESTComponents;QRWRunDXE10_2_w64;vclie;fs25;bindengine;DBXMySQLDriver;FireDACOracleDriver;FireDACMySQLDriver;DBXFirebirdDriver;ACBr_PAF;ACBr_Sintegra;FireDACCommonODBC;DataSnapClient;bindcompdbx;IndyIPCommon;ACBr_TCP;vcl;DBXSybaseASEDriver;IndyIPServer;Pk_Setes;ACBr_NFeDanfeRL;IndySystem;FireDACDb2Driver;ACBr_Integrador;dsnapcon;FireDACMSAccDriver;fmxFireDAC;FireDACInfxDriver;vclimg;fsADO25;TeeDB;ACBr_SPEDImportar;ACBr_SPED;PkgComPort;emshosting;ACBr_Comum;ACBr_MDFe;ACBr_BoletoRL;FireDACPgDriver;ibmonitor;FireDACASADriver;frxADO25;DBXOdbcDriver;FireDACTDataDriver;FMXTee;DbxCommonDriver;ibxpress;Tee;DataSnapServer;xmlrtl;DataSnapNativeClient;fmxobj;ibxbindings;FireDACDSDriver;rtl;vclwinx;DbxClientDriver;ACBr_OpenSSL;DBXSybaseASADriver;ACBr_DFeComum;CustomIPTransport;vcldsnap;frx25;ACBr_PIXCD;fsDB25;bindcomp;appanalytics;ACBr_Serial;DBXInformixDriver;IndyIPClient;frxDBX25;bindcompvcl;frce;ACBr_NFSeXDanfseRL;TeeUI;ACBr_BlocoX;dbxcds;VclSmp;ACBr_NFCeECFVirtual;adortl;FireDACODBCDriver;DataSnapIndy10ServerTransport;uniGUI25VCL;ACBr_Boleto;dsnapxml;DataSnapProviderClient;dbrtl;inetdbxpress;FireDACMongoDBDriver;IndyProtocols;frxIBX25;ACBr_MTER;uSynEdit_R2021;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>DBXSqliteDriver;DataSnapServerMidas;DBXDb2Driver;DBXInterBaseDriver;pkgADRIFood;vclactnband;ACBr_TEFD;vclFireDAC;svnui;tethering;uniGUI25Chart;FireDACADSDriver;frxe25;DBXMSSQLDriver;ACBr_MDFeDamdfeRL;DatasnapConnectorsFreePascal;FireDACMSSQLDriver;vcltouch;ACBr_NFe;vcldb;Intraweb;svn;bindcompfmx;DBXOracleDriver;fsIBX25;inetdb;ACBr_NFeDanfeESCPOS;ACBr_Diversos;ACBr_PAFNFCe;FmxTeeUI;emsedge;fmx;fmxdae;frxDB25;vclib;frxTee25;FireDACDBXDriver;dbexpress;IndyCore;vclx;dsnap;DataSnapCommon;fsTee25;ACBr_NFSeX;DataSnapConnectors;uniGUI25m;VCLRESTComponents;QRWRunDXE10_2_w64;vclie;fs25;bindengine;DBXMySQLDriver;FireDACOracleDriver;FireDACMySQLDriver;DBXFirebirdDriver;ACBr_PAF;ACBr_Sintegra;FireDACCommonODBC;DataSnapClient;bindcompdbx;IndyIPCommon;ACBr_TCP;vcl;DBXSybaseASEDriver;IndyIPServer;ACBr_NFeDanfeRL;IndySystem;FireDACDb2Driver;ACBr_Integrador;dsnapcon;FireDACMSAccDriver;fmxFireDAC;FireDACInfxDriver;vclimg;fsADO25;TeeDB;ACBr_SPEDImportar;ACBr_SPED;PkgComPort;emshosting;ACBr_Comum;ACBr_MDFe;ACBr_BoletoRL;FireDACPgDriver;ibmonitor;FireDACASADriver;frxADO25;DBXOdbcDriver;FireDACTDataDriver;FMXTee;DbxCommonDriver;ibxpress;Tee;DataSnapServer;xmlrtl;DataSnapNativeClient;fmxobj;ibxbindings;FireDACDSDriver;rtl;vclwinx;DbxClientDriver;ACBr_OpenSSL;DBXSybaseASADriver;ACBr_DFeComum;CustomIPTransport;vcldsnap;frx25;ACBr_PIXCD;fsDB25;bindcomp;appanalytics;ACBr_Serial;DBXInformixDriver;IndyIPClient;frxDBX25;bindcompvcl;frce;ACBr_NFSeXDanfseRL;TeeUI;ACBr_BlocoX;dbxcds;VclSmp;ACBr_NFCeECFVirtual;adortl;FireDACODBCDriver;DataSnapIndy10ServerTransport;uniGUI25VCL;ACBr_Boleto;dsnapxml;DataSnapProviderClient;dbrtl;inetdbxpress;FireDACMongoDBDriver;IndyProtocols;frxIBX25;ACBr_MTER;uSynEdit_R2021;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <BT_BuildType>Debug</BT_BuildType>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -140,6 +140,38 @@
         <DCCReference Include="view\module\operation\admin\tas_config.pas">
             <Form>TasConfig</Form>
             <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="model\ModelMGPedidoTrackingParams.pas"/>
+        <DCCReference Include="model\ModelMGPedidoBoleto.pas"/>
+        <DCCReference Include="controller\ControllerMGPedidoBoleto.pas"/>
+        <DCCReference Include="parameter\prm_mg_pedido_boleto.pas"/>
+        <DCCReference Include="view\module\operation\task\tas_mg_pedido.pas">
+            <Form>TasMgPedido</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="view\module\operation\task\tas_generate_order.pas">
+            <Form>TasGenerateOrder</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="view\inheritable\base_frame_list.pas">
+            <Form>BaseFrameList</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="view\frames\vendedor_frame_list.pas">
+            <Form>VendedorFrameList</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="view\frames\forma_pagamento_frame_list.pas">
+            <Form>FormaPagamentoFrameList</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="view\frames\tabela_preco_frame_list.pas">
+            <Form>TabelaPrecoFrameList</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
