@@ -5,7 +5,7 @@
         <FrameworkType>VCL</FrameworkType>
         <MainSource>Magazord.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
@@ -145,21 +145,8 @@
         <DCCReference Include="model\ModelMGPedidoBoleto.pas"/>
         <DCCReference Include="controller\ControllerMGPedidoBoleto.pas"/>
         <DCCReference Include="parameter\prm_mg_pedido_boleto.pas"/>
-        <DCCReference Include="view\module\operation\task\tas_mg_pedido.pas">
-            <Form>TasMgPedido</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="view\module\operation\task\tas_generate_order.pas">
-            <Form>TasGenerateOrder</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="view\inheritable\base_frame_list.pas">
             <Form>BaseFrameList</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="view\frames\vendedor_frame_list.pas">
-            <Form>VendedorFrameList</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
@@ -172,6 +159,19 @@
             <Form>TabelaPrecoFrameList</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="view\frames\vendedor_frame_list.pas">
+            <Form>VendedorFrameList</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="view\module\operation\task\tas_generate_order.pas">
+            <Form>TasGenerateOrder</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="view\module\operation\task\tas_mg_pedido.pas">
+            <Form>TasMgPedido</Form>
+            <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

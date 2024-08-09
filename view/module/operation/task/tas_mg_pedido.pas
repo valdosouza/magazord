@@ -80,6 +80,9 @@ type
     procedure SB_GerarPedidoClick(Sender: TObject);
   private
     FCodigoPedido: String;
+    FCodigoVendedor : Integer;
+    FCodigoFormaPagamento : Integer;
+    FCodigoTabelaPreco : Integer;
     procedure setFCodigoPedido(const Value: String);
     function ValidaDownloadPedido:Boolean;
     function DownloadPedido:Boolean;
@@ -93,6 +96,7 @@ type
     procedure CreateClienteSetes;
     procedure CreateEnderecoSetes;
 
+    function AbreTelaGenerateOrder:Boolean;
     function ValidaGeraPedidoCompleto:boolean;
     procedure GeraPedidoCompleto;
     procedure GeraPedido;
@@ -118,10 +122,37 @@ var
 
 implementation
 
-uses Un_Msg,un_variables,UnFunctions;
+uses Un_Msg,un_variables,UnFunctions, tas_generate_order;
 {$R *.dfm}
 
 { TTasMgPedido }
+
+function TTasMgPedido.AbreTelaGenerateOrder: Boolean;
+Var
+  Lc_form : TTasGenerateOrder;
+begin
+  Result := True;
+  Lc_form := TTasGenerateOrder.Create(self);
+  try
+    Lc_form.ShowModal;
+    if (Lc_form.VendedorFrameList.Dblcb_Lista.Text <> EmptyStr ) then
+      FCodigoVendedor := Lc_form.VendedorFrameList.Dblcb_Lista.KeyValue;
+
+    if (Lc_form.FormaPagamentoFrameList.Dblcb_Lista.Text <> EmptyStr ) then
+      FCodigoFormaPagamento := Lc_form.FormaPagamentoFrameList.Dblcb_Lista.KeyValue;
+
+    if (Lc_form.TabelaPrecoFrameList.Dblcb_Lista.Text <> EmptyStr ) then
+      FCodigoTabelaPreco := Lc_form.TabelaPrecoFrameList.Dblcb_Lista.KeyValue;
+
+    if (FCodigoVendedor = 0 ) or (FCodigoFormaPagamento = 0 ) or (FCodigoTabelaPreco = 0 ) then
+    Begin
+      Result := False;
+    End;
+
+  finally
+    FreeAndNil(Lc_form);
+  end;
+end;
 
 procedure TTasMgPedido.CreateClienteSetes;
 Var
@@ -230,8 +261,10 @@ procedure TTasMgPedido.GeraPedidoCompleto;
 begin
   if Pedido.exist then
   Begin
+    Pedido.DesregistrarEstoque;
     Pedido.DeletaItens;
     Pedido.delete;
+
   End;
   if ValidaCreateClienteSetes then
   Begin
@@ -269,9 +302,27 @@ begin
       AliqComissao := 0;
       Operacao := 'V';
       CodigoEstoque := Gb_cd_Estoque;
-      CodigoTabela := 1;
+      CodigoTabela := FCodigoTabelaPreco;
     End;
     Pedido.Itens.insere;
+    //Baixa simples produto a produto
+
+    with Pedido.CtrlEstoque.Registro do
+    Begin
+      Codigo      := 0;
+      Terminal    := 0;
+      Vinculo     := 'P';
+      Ordem       := Pedido.Itens.Registro.CodigoPedido;
+      Item        := Pedido.Itens.Registro.Codigo;
+      Estoque     := Gb_cd_Estoque;
+      operacao    := 'S';
+      Produto     := Pedido.Itens.Registro.CodigoProduto;
+      Quantidade  := StrToFloatDef(E_Qt_Produto.Text,0);
+      Data        := Pedido.Registro.Data;
+      Tipo        := 'Venda';
+      UpdateAt    := Now;
+    End;
+    Pedido.CtrlEstoque.Registra;
   End;
 end;
 
@@ -284,8 +335,8 @@ begin
     Usuario := Gb_Cd_Usuario;
     Data := MGPedido.Registro.DataHora;
     Empresa := Pedido.Cliente.Registro.Codigo;
-    Vendedor := Gb_Cd_Vendedor;
-    FormaPagto := 0;
+    Vendedor := FCodigoVendedor;
+    FormaPagto := FCodigoFormaPagamento;
     Prazo := '';
     Endereco := Pedido.Cliente.Empresa.Endereco.Registro.Codigo;
     QtdeProdutos := 0;
@@ -344,17 +395,13 @@ end;
 
 procedure TTasMgPedido.PreencheObservacao;
 begin
-  with E_Note, MGPedido do
-  Begin
-    Clear;
-    Lines.Add(concat('Forma pagamento: ',Registro.FormaPagamentoNome));
-    Lines.Add(concat('Forma Recebimento: ',Registro.FormaRecebimentoNome));
-    Lines.Add(concat('Condição Pagamento: ',Registro.CondicaoPagamentoNome));
-    Lines.Add(concat('Numero de parcelas: ',Registro.CondicaoPagamentoParcelas.ToString));
-    Lines.Add(concat('MarketplaceNome: ',Registro.MarketplaceNome));
-    Lines.Add(concat('Codigo: ',Registro.Codigo));
-    Lines.Add(concat('CodigoMarketplace: ',Registro.CodigoMarketplace));
-  End;
+  E_Note.Lines.Add(concat('Forma pagamento: ',MGPedido.Registro.FormaPagamentoNome));
+  E_Note.Lines.Add(concat('Forma Recebimento: ',MGPedido.Registro.FormaRecebimentoNome));
+  E_Note.Lines.Add(concat('Condição Pagamento: ',MGPedido.Registro.CondicaoPagamentoNome));
+  E_Note.Lines.Add(concat('Numero de parcelas: ',MGPedido.Registro.CondicaoPagamentoParcelas.ToString));
+  E_Note.Lines.Add(concat('MarketplaceNome: ',MGPedido.Registro.MarketplaceNome));
+  E_Note.Lines.Add(concat('Codigo: ',MGPedido.Registro.Codigo));
+  E_Note.Lines.Add(concat('CodigoMarketplace: ',MGPedido.Registro.CodigoMarketplace));
 end;
 
 procedure TTasMgPedido.PreencherPedido;
@@ -546,18 +593,35 @@ Begin
       End
       else
       Begin
-        if (MensagemPadrao('Mensagem de Confirmação',
-                           '                 Este pedido já foi gerado.'+EOLN+
-                           '      Você tem certeza de que deseja gerar novamente.'+EOLN+
-                           'Dados alterados serão perdidos se gerar o pedido novamente.'+EOLN+EOLN+
-                           'Confirmar a geração ?',
-                          ['Sim','Não'],[bEscape,bNormal],mpConfirmacao,clRed) = mrBotao2) then
+        if Pedido.Registro.Faturado = 'A' then
         Begin
+          MensagemPadrao('Mensagem','A T E N Ç Ã O!.'+EOLN+EOLN+
+                         'Este pedido está na lixeira.'+EOLN+
+                         'Você precisa retirá-lo da lixeira, apagando ou restaurando ele.'+EOLN,
+                         ['OK'],[bEscape],mpAlerta);
           Result := False;
           exit;
+        End
+        else
+        Begin
+          if (MensagemPadrao('Mensagem de Confirmação',
+                             '                 Este pedido já foi gerado.'+EOLN+
+                             '      Você tem certeza de que deseja gerar novamente.'+EOLN+
+                             'Dados alterados serão perdidos se gerar o pedido novamente.'+EOLN+EOLN+
+                             'Confirmar a geração ?',
+                            ['Sim','Não'],[bEscape,bNormal],mpConfirmacao,clRed) = mrBotao2) then
+          Begin
+            Result := False;
+            exit;
+          End;
         End;
       End;
     End;
+  End;
+  if not AbreTelaGenerateOrder then
+  Begin
+    Result := False;
+    exit;
   End;
 end;
 

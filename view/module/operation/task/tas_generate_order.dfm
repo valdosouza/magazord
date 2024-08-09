@@ -1,4 +1,5 @@
 inherited TasGenerateOrder: TTasGenerateOrder
+  BorderIcons = [biSystemMenu]
   Caption = 'Gera'#231#227'o do Pedido'
   ClientHeight = 199
   ClientWidth = 457
@@ -15,8 +16,6 @@ inherited TasGenerateOrder: TTasGenerateOrder
     BevelInner = bvRaised
     BevelOuter = bvLowered
     TabOrder = 0
-    ExplicitWidth = 636
-    ExplicitHeight = 360
     inline VendedorFrameList: TVendedorFrameList
       AlignWithMargins = True
       Left = 5
@@ -28,20 +27,21 @@ inherited TasGenerateOrder: TTasGenerateOrder
       TabOrder = 0
       ExplicitLeft = 5
       ExplicitTop = 5
-      ExplicitWidth = 626
+      ExplicitWidth = 447
       inherited L_Carteira: TLabel
         Width = 447
       end
       inherited pnl_linha_1: TPanel
         Width = 447
-        ExplicitWidth = 626
+        ExplicitWidth = 447
         inherited Sb_Carteira: TSpeedButton
           Left = 423
+          Visible = False
           ExplicitLeft = 602
         end
         inherited Dblcb_Lista: TDBLookupComboBox
           Width = 423
-          ExplicitWidth = 602
+          ExplicitWidth = 423
         end
       end
       inherited Qr_Lista: TSTQuery
@@ -60,20 +60,21 @@ inherited TasGenerateOrder: TTasGenerateOrder
       TabOrder = 1
       ExplicitLeft = 5
       ExplicitTop = 45
-      ExplicitWidth = 626
+      ExplicitWidth = 447
       inherited L_Carteira: TLabel
         Width = 447
       end
       inherited pnl_linha_1: TPanel
         Width = 447
-        ExplicitWidth = 626
+        ExplicitWidth = 447
         inherited Sb_Carteira: TSpeedButton
           Left = 423
+          Visible = False
           ExplicitLeft = 602
         end
         inherited Dblcb_Lista: TDBLookupComboBox
           Width = 423
-          ExplicitWidth = 602
+          ExplicitWidth = 423
         end
       end
     end
@@ -89,20 +90,21 @@ inherited TasGenerateOrder: TTasGenerateOrder
       TabOrder = 2
       ExplicitLeft = 5
       ExplicitTop = 86
-      ExplicitWidth = 626
+      ExplicitWidth = 447
       inherited L_Carteira: TLabel
         Width = 447
       end
       inherited pnl_linha_1: TPanel
         Width = 447
-        ExplicitWidth = 626
+        ExplicitWidth = 447
         inherited Sb_Carteira: TSpeedButton
           Left = 423
+          Visible = False
           ExplicitLeft = 602
         end
         inherited Dblcb_Lista: TDBLookupComboBox
           Width = 423
-          ExplicitWidth = 602
+          ExplicitWidth = 423
         end
       end
       inherited Qr_Lista: TSTQuery
@@ -117,8 +119,6 @@ inherited TasGenerateOrder: TTasGenerateOrder
     Height = 64
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 360
-    ExplicitWidth = 636
     object SB_GerarPedido: TSpeedButton
       AlignWithMargins = True
       Left = 237

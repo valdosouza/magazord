@@ -12,12 +12,12 @@ uses
   ModelMGPedidoBoleto in 'model\ModelMGPedidoBoleto.pas',
   ControllerMGPedidoBoleto in 'controller\ControllerMGPedidoBoleto.pas',
   prm_mg_pedido_boleto in 'parameter\prm_mg_pedido_boleto.pas',
-  tas_mg_pedido in 'view\module\operation\task\tas_mg_pedido.pas' {TasMgPedido},
-  tas_generate_order in 'view\module\operation\task\tas_generate_order.pas' {TasGenerateOrder},
   base_frame_list in 'view\inheritable\base_frame_list.pas' {BaseFrameList: TFrame},
-  vendedor_frame_list in 'view\frames\vendedor_frame_list.pas' {VendedorFrameList: TFrame},
   forma_pagamento_frame_list in 'view\frames\forma_pagamento_frame_list.pas' {FormaPagamentoFrameList: TFrame},
-  tabela_preco_frame_list in 'view\frames\tabela_preco_frame_list.pas' {TabelaPrecoFrameList: TFrame};
+  tabela_preco_frame_list in 'view\frames\tabela_preco_frame_list.pas' {TabelaPrecoFrameList: TFrame},
+  vendedor_frame_list in 'view\frames\vendedor_frame_list.pas' {VendedorFrameList: TFrame},
+  tas_generate_order in 'view\module\operation\task\tas_generate_order.pas' {TasGenerateOrder},
+  tas_mg_pedido in 'view\module\operation\task\tas_mg_pedido.pas' {TasMgPedido};
 
 {$R *.res}
 
@@ -26,7 +26,5 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TFrMain, FrMain);
-  Application.CreateForm(TTasMgPedido, TasMgPedido);
-  Application.CreateForm(TTasGenerateOrder, TasGenerateOrder);
   Application.Run;
 end.

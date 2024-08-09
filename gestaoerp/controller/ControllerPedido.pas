@@ -59,7 +59,7 @@ Type
     procedure DeletaItens;
     Function salvaPedidoInternet:Boolean;
     function UpdateObjInternet:boolean;
-
+    procedure DesregistrarEstoque;
     procedure setSequencia;
     Function getAll:Boolean;
     function valortotalitens:Real;
@@ -364,6 +364,21 @@ Begin
     FinalizaQuery(Lc_Qry);
   End;
 
+end;
+
+procedure TControllerPedido.DesregistrarEstoque;
+Var
+  I: Integer;
+begin
+  itens.Registro.CodigoPedido  := Registro.Codigo;
+  itens.getList;
+  for I := 0 to itens.Lista.Count -1 do
+  Begin
+    CtrlEstoque.Desregistra('P',
+                              itens.Lista[I].CodigoPedido,
+                              itens.Lista[I].Codigo
+    );
+  End;
 end;
 
 destructor TControllerPedido.Destroy;

@@ -979,6 +979,7 @@ inherited TasMgPedido: TTasMgPedido
       Layout = blGlyphTop
       ParentFont = False
       OnClick = SB_GerarPedidoClick
+      ExplicitTop = 5
     end
     object SB_Sair: TSpeedButton
       AlignWithMargins = True

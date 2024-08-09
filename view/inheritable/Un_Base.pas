@@ -371,6 +371,7 @@ begin
   Begin
     if Assigned(FAguarde) then
       FAguarde.Stop;
+    Screen.Cursor:=crDefault;
   End;
 end;
 

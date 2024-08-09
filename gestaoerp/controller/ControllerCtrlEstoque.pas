@@ -747,7 +747,9 @@ end;
 
 procedure TControllerCtrlEstoque.insert;
 begin
-  insertObj(Registro);
+  if Registro.Codigo = 0 then
+    Registro.Codigo := Generator('GN_CTRL_ESTOQUE');
+  InsertObj(Registro);
 end;
 
 function TControllerCtrlEstoque.RecontagemListarMovimento: Boolean;

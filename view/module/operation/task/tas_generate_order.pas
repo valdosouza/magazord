@@ -28,6 +28,7 @@ type
     procedure ImagemBotao;override;
     procedure IniciaVariaveis;override;
   public
+
   end;
 
 var
@@ -43,8 +44,13 @@ uses Un_Msg,un_variables,UnFunctions;
 procedure TTasGenerateOrder.AtivaFrames;
 begin
   VendedorFrameList.Listar;
+  VendedorFrameList.Dblcb_Lista.KeyValue := ExecGeneralConfig('L','MG_VENDEDOR',Gb_Cd_Vendedor.ToString());
+
   FormaPagamentoFrameList.Listar;
+  FormaPagamentoFrameList.Dblcb_Lista.KeyValue := ExecGeneralConfig('L','MG_FORMAPAGAMENTO','1');
+
   TabelaPrecoFrameList.Listar;
+  TabelaPrecoFrameList.Dblcb_Lista.KeyValue := ExecGeneralConfig('L','MG_TABELAPRECO','1');
 end;
 
 procedure TTasGenerateOrder.ImagemBotao;
@@ -62,26 +68,56 @@ end;
 
 procedure TTasGenerateOrder.SB_GerarPedidoClick(Sender: TObject);
 begin
-  try
-    ProcessoAguarde('I');
-    if ValidaGeraPedido then
-    Begin
-
-    End;
-  finally
-    ProcessoAguarde('F');
-  end;
+  if ValidaGeraPedido then
+  Begin
+    ExecGeneralConfig('G','MG_VENDEDOR',intToStr(VendedorFrameList.Dblcb_Lista.KeyValue));
+    ExecGeneralConfig('G','MG_FORMAPAGAMENTO',intToStr(FormaPagamentoFrameList.Dblcb_Lista.KeyValue));
+    ExecGeneralConfig('G','MG_TABELAPRECO',IntToStr(TabelaPrecoFrameList.Dblcb_Lista.KeyValue));
+    Close;
+  End;
 end;
 
 procedure TTasGenerateOrder.SB_SairClick(Sender: TObject);
 begin
-  inherited;
+  VendedorFrameList.Dblcb_Lista.KeyValue := Null;
+  FormaPagamentoFrameList.Dblcb_Lista.KeyValue := Null;
+  TabelaPrecoFrameList.Dblcb_Lista.KeyValue := Null;
   Close;
 end;
 
 function TTasGenerateOrder.ValidaGeraPedido: boolean;
 begin
   Result := True;
+  if (VendedorFrameList.Dblcb_Lista.Text = EmptyStr ) then
+  Begin
+    MensagemPadrao('Mensagem','A T E N Ç Ã O!.'+EOLN+EOLN+
+                   'Campo vendedor é obrigatório.'+EOLN+
+                   'Preencha para continuar.'+EOLN,
+                   ['OK'],[bEscape],mpAlerta);
+    Result := False;
+    exit;
+  End;
+
+  if (FormaPagamentoFrameList.Dblcb_Lista.Text = EmptyStr ) then
+  Begin
+    MensagemPadrao('Mensagem','A T E N Ç Ã O!.'+EOLN+EOLN+
+                   'Campo forma de pagamento é obrigatório.'+EOLN+
+                   'Preencha para continuar.'+EOLN,
+                   ['OK'],[bEscape],mpAlerta);
+    Result := False;
+    exit;
+  End;
+
+
+  if (TabelaPrecoFrameList.Dblcb_Lista.Text = EmptyStr ) then
+  Begin
+    MensagemPadrao('Mensagem','A T E N Ç Ã O!.'+EOLN+EOLN+
+                   'Campo Tabela de preço é obrigatório.'+EOLN+
+                   'Preencha para continuar.'+EOLN,
+                   ['OK'],[bEscape],mpAlerta);
+    Result := False;
+    exit;
+  End;
 end;
 
 end.

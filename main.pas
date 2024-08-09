@@ -313,6 +313,7 @@ begin
     MensagemPadrao('Mensagem','A T E N Ç Ã O!.'+EOLN+EOLN+
                    'Sincronia efetuado com sucesso.'+EOLN+EOLN,
                    ['OK'],[bEscape],mpInformacao);
+
   End;
 end;
 
