@@ -8,12 +8,14 @@ Type
   TPrmMGPedidoHeader = class(TPrmBase)
   private
     FFieldName: TMGPedidoHeader;
+    FIntegrado: String;
     procedure setFFieldName(const Value: TMGPedidoHeader);
+    procedure setFIntegrado(const Value: String);
   public
     constructor Create;override;
     destructor Destroy;override;
-
     property FieldName : TMGPedidoHeader read FFieldName write setFFieldName;
+    property Integrado : String read FIntegrado write setFIntegrado;
   end;
 
 implementation
@@ -35,6 +37,11 @@ end;
 procedure TPrmMGPedidoHeader.setFFieldName(const Value: TMGPedidoHeader);
 begin
   FFieldName := Value;
+end;
+
+procedure TPrmMGPedidoHeader.setFIntegrado(const Value: String);
+begin
+  FIntegrado := Value;
 end;
 
 end.

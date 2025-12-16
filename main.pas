@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.StdCtrls,REST.Json,IniFiles,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.StdCtrls,REST.Json,IniFiles,System.IOUtils,
   ModelMGPedidoRetorno,
   ModelMGPedido,
   ModelMGPedidoPromocoes,
@@ -57,6 +57,7 @@ type
     cds_searchTB_INSTITUTION_ID: TIntegerField;
     Configuraes1: TMenuItem;
     Button1: TButton;
+    Rg_Integrado: TRadioGroup;
     procedure ChBx_PeriodoClick(Sender: TObject);
     procedure AtualizarMdulo1Click(Sender: TObject);
     procedure Configuraes1Click(Sender: TObject);
@@ -101,22 +102,13 @@ end;
 procedure TFrMain.Button1Click(Sender: TObject);
 var
   f:TextFile; Linha:String;
-  Lc_memo : TMemo;
   Lc_Pedido : TMGPedidoRetorno;
   Codigo : String;
+  JsonText : String;
 begin
-  Lc_memo := TMemo.Create(self);
-  Lc_memo.Parent := self;
-  AssignFile(f, 'D:\temp\pedido.txt');
-  Reset(f);
-  While not Eof(f) do
-  Begin
-    Readln(f, Linha);
-    Lc_memo.Lines.Add(Linha)
-  End;
-  CloseFile(f);
+  JsonText := TFile.ReadAllText('D:\Magazord\infra\PedidoExample.json', TEncoding.UTF8);
   try
-    Lc_Pedido := TJson.JsonToObject<TMGPedidoRetorno>(Lc_memo.Text);
+    Lc_Pedido := TJson.JsonToObject<TMGPedidoRetorno>(JsonText);
     Codigo := Lc_Pedido.data.Codigo;
   Except
     on E: Exception do
@@ -220,6 +212,7 @@ begin
     Lc_form.ShowModal;
   Finally
     FreeAndNil(Lc_form);
+    Search;
   End;
 end;
 
@@ -250,6 +243,11 @@ begin
     MGPedidoheader.Parametros.DataFinal             := E_Data_Fim.DateTime;
     MGPedidoheader.Parametros.FieldName.Codigo      := E_Codigo.Text;
     MGPedidoheader.Parametros.FieldName.PessoaNome  := E_Cliente.Text;
+    case Rg_Integrado.ItemIndex of
+      0:MGPedidoheader.Parametros.Integrado := 'S';
+      1:MGPedidoheader.Parametros.Integrado := 'N';
+      2:MGPedidoheader.Parametros.Integrado := 'T';
+    end;
     MGPedidoheader.Search;
 
     if not cds_search.Active then cds_search.CreateDataSet;

@@ -4,7 +4,7 @@ interface
 
 uses
   JSON.Types, GenericEntity, System.Classes, System.Generics.Collections, ModelMGPedidoHistorico,
-  ModelMGPedidoPromocoes, ModelMGPedidoRastreio,CAtribEntity,
+  ModelMGPedidoPromocoes, ModelMGPedidoRastreio,CAtribEntity,ModelMGPagamentoPix,
   ModelMGPedidoTrackingParams, ModelMGPedidoBoleto;
 
 type
@@ -18,72 +18,79 @@ type
       TBloqueiosArray = array of String;
   private
     FLinkAvaliacao: string;
+    FPedidoTrackingParams: TMGPedidoTrackingParams;
     FLogradouro: string;
     FCondicaoPagamentoNome: string;
-    FPessoaSexo: Integer;
+    FPessoaSexo: String;
     FPessoaNome: string;
-    FValorFrete: Real;
+    FValorFrete: String;
     FFormaRecebimentoId: Integer;
     FPessoaTipo: Integer;
-    FId_loja: Integer;
-    FValorPersonalizacao: Real;
+    FValorPersonalizacao: String;
     FLojaDoMarketplaceId: Integer;
     FFormaPagamentoNome: string;
     FPedidoIp: string;
-    FPedidoPagamentoPix: String;
-    FDataHora: TDateTime;
+    FPedidoPagamentoPix: TMGPagamentoPix;
+    FDataHora: String;
     FPedidoTrackingSource: string;
     FBairro: string;
-    FValorProduto: Real;
+    FValorProduto: String;
     FPedidoSituacaoDescricao: string;
     FPedidoHistorico: TPedidoHistoricoArray;
-    FArrayPedidoRastreio: TPedidoRastreioArray;
     FPedidoAnaliseRisco: String;
     FCuponTipoDesconto: Integer;
-    FValorAcrescimo: Real;
-    FValorDesconto: Real;
-    FPessoaDataNascimento: TDateTime;
+    FValorAcrescimo: String;
+    FValorDesconto: String;
+    FPedidoPagamentoValorPix: String;
+    FPessoaDataNascimento: String;
     FPessoaEmail: string;
     FTags: TTagsArray;
-    FCreditoUtilizado: Real;
+    FCreditoUtilizado: String;
     FMarketplaceNome: string;
     FCodigo: string;
     FLojaUrl: string;
     FFormaRecebimentoNome: string;
     FLojaNome: string;
     FLojaDoMarketplaceNome: string;
-    FDataMarketplace: TDateTime;
+    FDataMarketplace: String;
     FCodigoSecundario: string;
     FCep: string;
     FPedidoSituacaoDescricaoDetalhada: string;
     FId: Integer;
     FNumero: string;
+    FLojaMarketplaceOpcoes: string;
     FValorTotalFinal: Real;
     FLojaMarketplaceId: Integer;
-    FCuponValorDesconto: Real;
-    FCashbackUtilizado: Real;
-    FValorTotal: Real;
+    FCuponValorDesconto: String;
+    FCashbackUtilizado: String;
+    FValorTotal: String;
     FEstadoSigla: string;
     FBloqueios: TBloqueiosArray;
-    FTipoCadastroPM: Integer;
+    FTipoCadastroPM: String;
     FCuponCodigo: string;
     FPedidoSituacaoEtapa: Integer;
     FCondicaoPagamentoId: Integer;
     FPessoaCpfCnpj: string;
     FPessoaId: Integer;
+    FId_loja: Integer;
+    FMostraProcessos: boolean;
     FPedidoPagamentoAme: string;
     FComplemento: string;
     FFormaPagamentoId: Integer;
     FPedidoPromocoes: TMGPedidoPromocoes;
     FBoletos: TBoletosArray;
     FCidadeNome: string;
-    FValorPresente: Real;
+    FValorPresente: String;
     FTB_INSTITUTION_ID: Integer;
+    FmonitoraPedido: boolean;
+    FPedidoTrackingCountryCode: String;
     FPaisNome: string;
     FPedidoSituacaoTipo: Integer;
-    FGatewayPagamentoId: Integer;
+    FGatewayPagamentoId: String;
+    FCodigoVendedor: String;
     FLinkPagamento: string;
     FCodigoMarketplace: string;
+    FArrayPedidoRastreio: TPedidoRastreioArray;
     FPedidoSituacao: Integer;
     FCondicaoPagamentoParcelas: Integer;
     FLojaMarketplaceNome: string;
@@ -91,14 +98,13 @@ type
     FOrigem: Integer;
     FLojaUrlImagem: string;
     FNomeDestinatario: string;
-    FDataPreVenda: TDateTime;
+    FDataPreVenda: String;
     FMarketplaceId: Integer;
-    FPedidoTrackingParams: TMGPedidoTrackingParams;
     procedure setFArrayPedidoRastreio(const Value: TPedidoRastreioArray);
     procedure setFBairro(const Value: string);
     procedure setFBloqueios(const Value: TBloqueiosArray);
     procedure setFBoletos(const Value: TBoletosArray);
-    procedure setFCashbackUtilizado(const Value: Real);
+    procedure setFCashbackUtilizado(const Value: String);
     procedure setFCep(const Value: string);
     procedure setFCidadeNome(const Value: string);
     procedure setFCodigo(const Value: string);
@@ -108,19 +114,19 @@ type
     procedure setFCondicaoPagamentoId(const Value: Integer);
     procedure setFCondicaoPagamentoNome(const Value: string);
     procedure setFCondicaoPagamentoParcelas(const Value: Integer);
-    procedure setFCreditoUtilizado(const Value: Real);
+    procedure setFCreditoUtilizado(const Value: String);
     procedure setFCuponCodigo(const Value: string);
     procedure setFCuponTipoDesconto(const Value: Integer);
-    procedure setFCuponValorDesconto(const Value: Real);
-    procedure setFDataHora(const Value: TDateTime);
-    procedure setFDataMarketplace(const Value: TDateTime);
-    procedure setFDataPreVenda(const Value: TDateTime);
+    procedure setFCuponValorDesconto(const Value: String);
+    procedure setFDataHora(const Value: String);
+    procedure setFDataMarketplace(const Value: String);
+    procedure setFDataPreVenda(const Value: String);
     procedure setFEstadoSigla(const Value: string);
     procedure setFFormaPagamentoId(const Value: Integer);
     procedure setFFormaPagamentoNome(const Value: string);
     procedure setFFormaRecebimentoId(const Value: Integer);
     procedure setFFormaRecebimentoNome(const Value: string);
-    procedure setFGatewayPagamentoId(const Value: Integer);
+    procedure setFGatewayPagamentoId(const Value: String);
     procedure setFId(const Value: Integer);
     procedure setFId_loja(const Value: Integer);
     procedure setFLinkAvaliacao(const Value: string);
@@ -130,11 +136,14 @@ type
     procedure setFLojaDoMarketplaceNome(const Value: string);
     procedure setFLojaMarketplaceId(const Value: Integer);
     procedure setFLojaMarketplaceNome(const Value: string);
+    procedure setFLojaMarketplaceOpcoes(const Value: string);
     procedure setFLojaNome(const Value: string);
     procedure setFLojaUrl(const Value: string);
     procedure setFLojaUrlImagem(const Value: string);
     procedure setFMarketplaceId(const Value: Integer);
     procedure setFMarketplaceNome(const Value: string);
+    procedure setFMonitoraPedido(const Value: boolean);
+    procedure setFMostraProcessos(const Value: boolean);
     procedure setFNomeDestinatario(const Value: string);
     procedure setFNumero(const Value: string);
     procedure setFOrigem(const Value: Integer);
@@ -143,34 +152,37 @@ type
     procedure setFPedidoHistorico(const Value: TPedidoHistoricoArray);
     procedure setFPedidoIp(const Value: string);
     procedure setFPedidoPagamentoAme(const Value: string);
-    procedure setFPedidoPagamentoPix(const Value: String);
+    procedure setFPedidoPagamentoPix(const Value: TMGPagamentoPix);
+    procedure setFPedidoPagamentoValorPix(const Value: String);
     procedure setFPedidoPromocoes(const Value: TMGPedidoPromocoes);
     procedure setFPedidoSituacao(const Value: Integer);
     procedure setFPedidoSituacaoDescricao(const Value: string);
     procedure setFPedidoSituacaoDescricaoDetalhada(const Value: string);
     procedure setFPedidoSituacaoEtapa(const Value: Integer);
     procedure setFPedidoSituacaoTipo(const Value: Integer);
+    procedure setFPedidoTrackingCountryCode(const Value: String);
+    procedure setFPedidoTrackingParams(const Value: TMGPedidoTrackingParams);
     procedure setFPedidoTrackingSource(const Value: string);
     procedure setFPedidoTrackingUserAgent(const Value: string);
     procedure setFPessoaCpfCnpj(const Value: string);
-    procedure setFPessoaDataNascimento(const Value: TDateTime);
+    procedure setFPessoaDataNascimento(const Value: String);
     procedure setFPessoaEmail(const Value: string);
     procedure setFPessoaId(const Value: Integer);
     procedure setFPessoaNome(const Value: string);
-    procedure setFPessoaSexo(const Value: Integer);
+    procedure setFPessoaSexo(const Value: String);
     procedure setFPessoaTipo(const Value: Integer);
     procedure setFTags(const Value: TTagsArray);
     procedure setFTB_INSTITUTION_ID(const Value: Integer);
-    procedure setFTipoCadastroPM(const Value: Integer);
-    procedure setFValorAcrescimo(const Value: Real);
-    procedure setFValorDesconto(const Value: Real);
-    procedure setFValorFrete(const Value: Real);
-    procedure setFValorPersonalizacao(const Value: Real);
-    procedure setFValorPresente(const Value: Real);
-    procedure setFValorProduto(const Value: Real);
-    procedure setFValorTotal(const Value: Real);
+    procedure setFTipoCadastroPM(const Value: String);
+    procedure setFValorAcrescimo(const Value: String);
+    procedure setFValorDesconto(const Value: String);
+    procedure setFValorFrete(const Value: String);
+    procedure setFValorPersonalizacao(const Value: String);
+    procedure setFValorPresente(const Value: String);
+    procedure setFValorProduto(const Value: String);
+    procedure setFValorTotal(const Value: String);
     procedure setFValorTotalFinal(const Value: Real);
-    procedure setFPedidoTrackingParams(const Value: TMGPedidoTrackingParams);
+
 
   public
     constructor Create();Override;
@@ -185,7 +197,7 @@ type
     property Id: Integer read FId write setFId;
 
     [FieldName('ID_LOJA')]
-    property IdLoja: Integer read FId_loja write setFId_loja;
+    property Id_Loja: Integer read FId_loja write setFId_loja;
 
     [FieldName('LOJA_NOME')]
     property LojaNome: string read FLojaNome write setFLojaNome;
@@ -197,25 +209,25 @@ type
     property CodigoSecundario: string read FCodigoSecundario write setFCodigoSecundario;
 
     [FieldName('DATA_HORA')]
-    property DataHora: TDateTime read FDataHora write setFDataHora;
+    property DataHora: String read FDataHora write setFDataHora;
 
     [FieldName('VALOR_PRODUTO')]
-    property ValorProduto: Real read FValorProduto write setFValorProduto;
+    property ValorProduto: String read FValorProduto write setFValorProduto;
 
     [FieldName('VALOR_FRETE')]
-    property ValorFrete: Real read FValorFrete write setFValorFrete;
+    property ValorFrete: String read FValorFrete write setFValorFrete;
 
     [FieldName('VALOR_DESCONTO')]
-    property ValorDesconto: Real read FValorDesconto write setFValorDesconto;
+    property ValorDesconto: String read FValorDesconto write setFValorDesconto;
 
     [FieldName('VALOR_ACRESCIMO')]
-    property ValorAcrescimo: Real read FValorAcrescimo write setFValorAcrescimo;
+    property ValorAcrescimo: String read FValorAcrescimo write setFValorAcrescimo;
 
     [FieldName('VALOR_PRESENTE')]
-    property ValorPresente: Real read FValorPresente write setFValorPresente;
+    property ValorPresente: String read FValorPresente write setFValorPresente;
 
     [FieldName('VALOR_TOTAL')]
-    property ValorTotal: Real read FValorTotal write setFValorTotal;
+    property ValorTotal: String read FValorTotal write setFValorTotal;
 
     [FieldName('origem')]
     property Origem: Integer read FOrigem write setFOrigem;
@@ -239,10 +251,10 @@ type
     property PessoaTipo: Integer read FPessoaTipo write setFPessoaTipo;
 
     [FieldName('PESSOA_DATA_NASCIMENTO')]
-    property PessoaDataNascimento: TDateTime read FPessoaDataNascimento write setFPessoaDataNascimento;
+    property PessoaDataNascimento: String read FPessoaDataNascimento write setFPessoaDataNascimento;
 
     [FieldName('PESSOA_SEXO')]
-    property PessoaSexo: Integer read FPessoaSexo write setFPessoaSexo;
+    property PessoaSexo: String read FPessoaSexo write setFPessoaSexo;
 
     [FieldName('FORMA_PAGAMENTO_ID')]
     property FormaPagamentoId: Integer read FFormaPagamentoId write setFFormaPagamentoId;
@@ -269,7 +281,7 @@ type
     property CodigoMarketplace: string read FCodigoMarketplace write setFCodigoMarketplace;
 
     [FieldName('DATA_MARKETPLACE')]
-    property DataMarketplace: TDateTime read FDataMarketplace write setFDataMarketplace;
+    property DataMarketplace: String read FDataMarketplace write setFDataMarketplace;
 
     [FieldName('PEDIDO_SITUACAO')]
     property PedidoSituacao: Integer read FPedidoSituacao write setFPedidoSituacao;
@@ -287,7 +299,7 @@ type
     property PedidoSituacaoDescricaoDetalhada: string read FPedidoSituacaoDescricaoDetalhada write setFPedidoSituacaoDescricaoDetalhada;
 
     [FieldName('DATA_PRE_VENDA')]
-    property DataPreVenda: TDateTime read FDataPreVenda write setFDataPreVenda;
+    property DataPreVenda: String read FDataPreVenda write setFDataPreVenda;
 
     [FieldName('NOME_DESTINATARIO')]
     property NomeDestinatario: string read FNomeDestinatario write setFNomeDestinatario;
@@ -329,7 +341,7 @@ type
     property CupomCodigo: string read FCuponCodigo write setFCuponCodigo;
 
     [FieldName('CUPOM_VALOR_DESCONTO')]
-    property CupomValorDesconto: Real read FCuponValorDesconto write setFCuponValorDesconto;
+    property CupomValorDesconto: String read FCuponValorDesconto write setFCuponValorDesconto;
 
     [FieldName('CUPOM_TIPO_DESCONTO')]
     property CupomTipoDesconto: Integer read FCuponTipoDesconto write setFCuponTipoDesconto;
@@ -353,13 +365,13 @@ type
     property FormaRecebimentoNome: string read FFormaRecebimentoNome write setFFormaRecebimentoNome;
 
     [FieldName('GATEWAY_PAGAMENTO_ID')]
-    property GatewayPagamentoId: Integer read FGatewayPagamentoId write setFGatewayPagamentoId;
+    property GatewayPagamentoId: String read FGatewayPagamentoId write setFGatewayPagamentoId;
 
     [FieldName('TIPO_CADASTRO_PM')]
-    property TipoCadastroPM: Integer read FTipoCadastroPM write setFTipoCadastroPM;
+    property TipoCadastroPM: String read FTipoCadastroPM write setFTipoCadastroPM;
 
     [FieldName('VALOR_PERSONALIZACAO')]
-    property ValorPersonalizacao: Real read FValorPersonalizacao write setFValorPersonalizacao;
+    property ValorPersonalizacao: String read FValorPersonalizacao write setFValorPersonalizacao;
 
     [FieldName('LOJA_URL_IMAGEM')]
     property LojaUrlImagem: string read FLojaUrlImagem write setFLojaUrlImagem;
@@ -368,10 +380,10 @@ type
     property LojaUrl: string read FLojaUrl write setFLojaUrl;
 
     [FieldName('CREDITO_UTILIZADO')]
-    property CreditoUtilizado: Real read FCreditoUtilizado write setFCreditoUtilizado;
+    property CreditoUtilizado: String read FCreditoUtilizado write setFCreditoUtilizado;
 
     [FieldName('CASHBACK_UTILIZADO')]
-    property CashbackUtilizado: Real read FCashbackUtilizado write setFCashbackUtilizado;
+    property CashbackUtilizado: String read FCashbackUtilizado write setFCashbackUtilizado;
 
     [FieldName('PEDIDO_ANALISE_RISCO')]
     property PedidoAnaliseRisco: String read FPedidoAnaliseRisco write setFPedidoAnaliseRisco;
@@ -379,12 +391,14 @@ type
     [FieldName('VALOR_TOTAL_FINAL')]
     property ValorTotalFinal: Real read FValorTotalFinal write setFValorTotalFinal;
 
-    property PedidoRastreio: TPedidoRastreioArray read FArrayPedidoRastreio write setFArrayPedidoRastreio;
+    property ArrayPedidoRastreio: TPedidoRastreioArray read FArrayPedidoRastreio write setFArrayPedidoRastreio;
 
     property Boletos: TBoletosArray read FBoletos write setFBoletos;
 
     [FieldName('PEDIDO_PAGAMENTO_PIX')]
-    property PedidoPagamentoPix: String read FPedidoPagamentoPix write setFPedidoPagamentoPix;
+    property PedidoPagamentoValorPix: String read FPedidoPagamentoValorPix write setFPedidoPagamentoValorPix;
+
+    property PedidoPagamentoPix: TMGPagamentoPix read FPedidoPagamentoPix write setFPedidoPagamentoPix;
 
     [FieldName('LINK_PAGAMENTO')]
     property LinkPagamento: string read FLinkPagamento write setFLinkPagamento;
@@ -403,6 +417,16 @@ type
 
     property Bloqueios: TBloqueiosArray read FBloqueios write setFBloqueios;
 
+    property codigoVendedor : String read FCodigoVendedor write FCodigoVendedor;
+
+    property pedidoTrackingCountryCode : String read FPedidoTrackingCountryCode write setFPedidoTrackingCountryCode;
+
+    property lojaMarketplaceOpcoes : string read FLojaMarketplaceOpcoes write setFLojaMarketplaceOpcoes;
+
+    property mostraProcessos : boolean read FMostraProcessos write setFMostraProcessos;
+
+    property monitoraPedido : boolean read FmonitoraPedido write setFMonitoraPedido;
+
   end;
 
 implementation
@@ -413,6 +437,7 @@ constructor TMGPedido.create();
 begin
   inherited;
   FPedidoPromocoes := TMGPedidoPromocoes.create;
+  PedidoPagamentoPix  := TMGPagamentoPix.create;
 end;
 
 destructor TMGPedido.Destroy;
@@ -441,7 +466,7 @@ begin
   FBoletos := Value;
 end;
 
-procedure TMGPedido.setFCashbackUtilizado(const Value: Real);
+procedure TMGPedido.setFCashbackUtilizado(const Value: String);
 begin
   FCashbackUtilizado := Value;
 end;
@@ -491,7 +516,7 @@ begin
   FCondicaoPagamentoParcelas := Value;
 end;
 
-procedure TMGPedido.setFCreditoUtilizado(const Value: Real);
+procedure TMGPedido.setFCreditoUtilizado(const Value: String);
 begin
   FCreditoUtilizado := Value;
 end;
@@ -506,22 +531,22 @@ begin
   FCuponTipoDesconto := Value;
 end;
 
-procedure TMGPedido.setFCuponValorDesconto(const Value: Real);
+procedure TMGPedido.setFCuponValorDesconto(const Value: String);
 begin
   FCuponValorDesconto := Value;
 end;
 
-procedure TMGPedido.setFDataHora(const Value: TDateTime);
+procedure TMGPedido.setFDataHora(const Value: String);
 begin
   FDataHora := Value;
 end;
 
-procedure TMGPedido.setFDataMarketplace(const Value: TDateTime);
+procedure TMGPedido.setFDataMarketplace(const Value: String);
 begin
   FDataMarketplace := Value;
 end;
 
-procedure TMGPedido.setFDataPreVenda(const Value: TDateTime);
+procedure TMGPedido.setFDataPreVenda(const Value: String);
 begin
   FDataPreVenda := Value;
 end;
@@ -551,7 +576,7 @@ begin
   FFormaRecebimentoNome := Value;
 end;
 
-procedure TMGPedido.setFGatewayPagamentoId(const Value: Integer);
+procedure TMGPedido.setFGatewayPagamentoId(const Value: String);
 begin
   FGatewayPagamentoId := Value;
 end;
@@ -601,6 +626,11 @@ begin
   FLojaMarketplaceNome := Value;
 end;
 
+procedure TMGPedido.setFLojaMarketplaceOpcoes(const Value: string);
+begin
+  FLojaMarketplaceOpcoes := Value;
+end;
+
 procedure TMGPedido.setFLojaNome(const Value: string);
 begin
   FLojaNome := Value;
@@ -624,6 +654,16 @@ end;
 procedure TMGPedido.setFMarketplaceNome(const Value: string);
 begin
   FMarketplaceNome := Value;
+end;
+
+procedure TMGPedido.setFMonitoraPedido(const Value: boolean);
+begin
+  FmonitoraPedido := Value;
+end;
+
+procedure TMGPedido.setFMostraProcessos(const Value: boolean);
+begin
+  FMostraProcessos := Value;
 end;
 
 procedure TMGPedido.setFNomeDestinatario(const Value: string);
@@ -666,9 +706,14 @@ begin
   FPedidoPagamentoAme := Value;
 end;
 
-procedure TMGPedido.setFPedidoPagamentoPix(const Value: String);
+procedure TMGPedido.setFPedidoPagamentoPix(const Value: TMGPagamentoPix);
 begin
   FPedidoPagamentoPix := Value;
+end;
+
+procedure TMGPedido.setFPedidoPagamentoValorPix(const Value: String);
+begin
+  FPedidoPagamentoValorPix := Value;
 end;
 
 procedure TMGPedido.setFPedidoPromocoes(const Value: TMGPedidoPromocoes);
@@ -701,6 +746,10 @@ begin
   FPedidoSituacaoTipo := Value;
 end;
 
+procedure TMGPedido.setFPedidoTrackingCountryCode(const Value: String);
+begin
+  FPedidoTrackingCountryCode := Value;
+end;
 
 procedure TMGPedido.setFPedidoTrackingParams(
   const Value: TMGPedidoTrackingParams);
@@ -723,7 +772,7 @@ begin
   FPessoaCpfCnpj := Value;
 end;
 
-procedure TMGPedido.setFPessoaDataNascimento(const Value: TDateTime);
+procedure TMGPedido.setFPessoaDataNascimento(const Value: String);
 begin
   FPessoaDataNascimento := Value;
 end;
@@ -743,7 +792,7 @@ begin
   FPessoaNome := Value;
 end;
 
-procedure TMGPedido.setFPessoaSexo(const Value: Integer);
+procedure TMGPedido.setFPessoaSexo(const Value: String);
 begin
   FPessoaSexo := Value;
 end;
@@ -763,42 +812,42 @@ begin
   FTB_INSTITUTION_ID := Value;
 end;
 
-procedure TMGPedido.setFTipoCadastroPM(const Value: Integer);
+procedure TMGPedido.setFTipoCadastroPM(const Value: String);
 begin
   FTipoCadastroPM := Value;
 end;
 
-procedure TMGPedido.setFValorAcrescimo(const Value: Real);
+procedure TMGPedido.setFValorAcrescimo(const Value: String);
 begin
   FValorAcrescimo := Value;
 end;
 
-procedure TMGPedido.setFValorDesconto(const Value: Real);
+procedure TMGPedido.setFValorDesconto(const Value: String);
 begin
   FValorDesconto := Value;
 end;
 
-procedure TMGPedido.setFValorFrete(const Value: Real);
+procedure TMGPedido.setFValorFrete(const Value: String);
 begin
   FValorFrete := Value;
 end;
 
-procedure TMGPedido.setFValorPersonalizacao(const Value: Real);
+procedure TMGPedido.setFValorPersonalizacao(const Value: String);
 begin
   FValorPersonalizacao := Value;
 end;
 
-procedure TMGPedido.setFValorPresente(const Value: Real);
+procedure TMGPedido.setFValorPresente(const Value: String);
 begin
   FValorPresente := Value;
 end;
 
-procedure TMGPedido.setFValorProduto(const Value: Real);
+procedure TMGPedido.setFValorProduto(const Value: String);
 begin
   FValorProduto := Value;
 end;
 
-procedure TMGPedido.setFValorTotal(const Value: Real);
+procedure TMGPedido.setFValorTotal(const Value: String);
 begin
   FValorTotal := Value;
 end;

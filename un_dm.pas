@@ -66,7 +66,7 @@ begin
   End;
 
 
-  DM.IBD_Gestao.Close;
+  DM.IBD_Gestao.Connected := False;
   //DM.IBD_Gestao.DatabaseName := Concat(LcServer,'/',LcPort,LcDatabase);
   {
   Database=/home/genio/database/IBGCOM.FDB

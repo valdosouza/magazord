@@ -1,24 +1,25 @@
 inherited FrMain: TFrMain
   Caption = 'Controle de pedidos loja virtual Magazord'
   ClientHeight = 692
-  ClientWidth = 1522
+  ClientWidth = 1341
   WindowState = wsMaximized
-  ExplicitWidth = 1528
+  ExplicitLeft = -222
+  ExplicitWidth = 1347
   ExplicitHeight = 741
   PixelsPerInch = 96
   TextHeight = 13
   inherited Pnl_Fundo: TPanel
     Top = 63
-    Width = 1516
+    Width = 1335
     Height = 626
     ExplicitTop = 63
-    ExplicitWidth = 1516
+    ExplicitWidth = 1335
     ExplicitHeight = 626
     inherited Lb_ResultadoPesquisa: TLabel
-      Width = 1512
+      Width = 1331
     end
     inherited DBG_Pesquisa: TDBGrid
-      Width = 1420
+      Width = 1239
       Height = 608
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgTitleClick]
       Columns = <
@@ -169,9 +170,9 @@ inherited FrMain: TFrMain
         end>
     end
     inherited pnl_pesq_right: TPanel
-      Left = 1422
+      Left = 1241
       Height = 608
-      ExplicitLeft = 1422
+      ExplicitLeft = 1241
       ExplicitHeight = 608
       inherited Sb_Sair_0: TSpeedButton
         Top = 545
@@ -193,9 +194,9 @@ inherited FrMain: TFrMain
     end
   end
   inherited Pnl_Parametros: TPanel
-    Width = 1516
+    Width = 1335
     Height = 54
-    ExplicitWidth = 1516
+    ExplicitWidth = 1335
     ExplicitHeight = 54
     object Lb_Placa: TLabel
       Left = 177
@@ -287,15 +288,33 @@ inherited FrMain: TFrMain
       TabOrder = 3
     end
     object Button1: TButton
-      Left = 808
-      Top = 8
+      Left = 1128
+      Top = 15
       Width = 75
       Height = 25
       Caption = 'Teste '
-      Enabled = False
       TabOrder = 5
-      Visible = False
       OnClick = Button1Click
+    end
+    object Rg_Integrado: TRadioGroup
+      Left = 715
+      Top = 2
+      Width = 198
+      Height = 47
+      Caption = 'Pedidos Integrados'
+      Columns = 3
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ItemIndex = 1
+      Items.Strings = (
+        'Sim'
+        'N'#227'o'
+        'Todos')
+      ParentFont = False
+      TabOrder = 6
     end
   end
   inherited MnuBase: TMainMenu

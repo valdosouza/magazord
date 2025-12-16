@@ -21,21 +21,22 @@ type
     FPedidoSituacaoDescricao: string;
     FValorFreteTransportadora: string;
     FTransportadoraServicoTipo: Integer;
-    FPedidoRastreioHistorico: String;
+
     FLink: string;
     FTransportadoraTextoEntrega: string;
-    FDataLimiteEntregaCliente: TDateTime;
+    FDataLimiteEntregaCliente: String;
     FCodigoRastreio: string;
     FPedidoSituacaoDescricaoDetalhada: string;
     FId: Integer;
     FPedidoNotaFiscal: TPedidoNotaFiscalArray;
     FTransportadoraAgenciaCodigoServico: string;
     FPedidoSituacaoEtapa: Integer;
-    FDataLimitePostagem: TDateTime;
+    FDataLimitePostagem: String;
     FDiasUteis: Integer;
     FTransportadoraId: Integer;
     FSituacao: Integer;
     FTransportadoraServicoDescricao: string;
+    FTB_INSTITUTION_ID: Integer;
     FPedidoSituacaoTipo: Integer;
     FPedidoItem: TPedidoItemArray;
     FPedidoLojistaCodigo: string;
@@ -43,10 +44,9 @@ type
     FTransportadoraServicoId: Integer;
     FPedidoSituacao: Integer;
     FTransportadoraAgenciaNome: string;
-    FTB_INSTITUTION_ID: Integer;
     procedure setFCodigoRastreio(const Value: string);
-    procedure setFDataLimiteEntregaCliente(const Value: TDateTime);
-    procedure setFDataLimitePostagem(const Value: TDateTime);
+    procedure setFDataLimiteEntregaCliente(const Value: String);
+    procedure setFDataLimitePostagem(const Value: String);
     procedure setFDiasUteis(const Value: Integer);
     procedure setFId(const Value: Integer);
     procedure setFLink(const Value: string);
@@ -54,13 +54,14 @@ type
     procedure setFPedidoItem(const Value: TPedidoItemArray);
     procedure setFPedidoLo(const Value: string);
     procedure setFPedidoNotaFiscal(const Value: TPedidoNotaFiscalArray);
-    procedure setFPedidoRastreioHistorico(const Value: String);
+
     procedure setFPedidoSituacao(const Value: Integer);
     procedure setFPedidoSituacaoDescricao(const Value: string);
     procedure setFPedidoSituacaoDescricaoDetalhada(const Value: string);
     procedure setFPedidoSituacaoEtapa(const Value: Integer);
     procedure setFPedidoSituacaoTipo(const Value: Integer);
     procedure setFSituacao(const Value: Integer);
+    procedure setFTB_INSTITUTION_ID(const Value: Integer);
     procedure setFTransportadoraAgenciaCodigoServico(const Value: string);
     procedure setFTransportadoraAgenciaNome(const Value: string);
     procedure setFTransportadoraCodigoRastreioInterno(const Value: Boolean);
@@ -74,7 +75,6 @@ type
     procedure setFTransportadoraTipo(const Value: Integer);
     procedure setFValorFrete(const Value: string);
     procedure setFValorFreteTransportadora(const Value: string);
-    procedure setFTB_INSTITUTION_ID(const Value: Integer);
 
   public
 
@@ -105,10 +105,10 @@ type
     property Link: string read FLink write setFLink;
 
     [FieldName('DATA_LIMITE_ENTREGA_CLIENTE')]
-    property DataLimiteEntregaCliente: TDateTime read FDataLimiteEntregaCliente write setFDataLimiteEntregaCliente;
+    property DataLimiteEntregaCliente: String read FDataLimiteEntregaCliente write setFDataLimiteEntregaCliente;
 
     [FieldName('DATA_LIMITE_POSTAGEM')]
-    property DataLimitePostagem: TDateTime read FDataLimitePostagem write setFDataLimitePostagem;
+    property DataLimitePostagem: String read FDataLimitePostagem write setFDataLimitePostagem;
 
     [FieldName('Situacao')]
     property Situacao: Integer read FSituacao write setFSituacao;
@@ -171,8 +171,8 @@ type
 
     property PedidoNotaFiscal: TPedidoNotaFiscalArray read FPedidoNotaFiscal write setFPedidoNotaFiscal;
 
-    [FieldName('PEDIDO_RASTREIO_HISTORICO')]
-    property PedidoRastreioHistorico: String read FPedidoRastreioHistorico write setFPedidoRastreioHistorico;
+//    [FieldName('PEDIDO_RASTREIO_HISTORICO')]
+//    property PedidoRastreioHistorico: String read FPedidoRastreioHistorico write setFPedidoRastreioHistorico;
 
   end;
 
@@ -192,18 +192,18 @@ begin
   SetLength(FPedidoNotaFiscal,I);
 end;
 
+
 procedure TMGPedidoRastreio.setFCodigoRastreio(const Value: string);
 begin
   FCodigoRastreio := Value;
 end;
 
-procedure TMGPedidoRastreio.setFDataLimiteEntregaCliente(
-  const Value: TDateTime);
+procedure TMGPedidoRastreio.setFDataLimiteEntregaCliente(const Value: String);
 begin
   FDataLimiteEntregaCliente := Value;
 end;
 
-procedure TMGPedidoRastreio.setFDataLimitePostagem(const Value: TDateTime);
+procedure TMGPedidoRastreio.setFDataLimitePostagem(const Value: String);
 begin
   FDataLimitePostagem := Value;
 end;
@@ -242,11 +242,6 @@ procedure TMGPedidoRastreio.setFPedidoNotaFiscal(
   const Value: TPedidoNotaFiscalArray);
 begin
   FPedidoNotaFiscal := Value;
-end;
-
-procedure TMGPedidoRastreio.setFPedidoRastreioHistorico(const Value: String);
-begin
-  FPedidoRastreioHistorico := Value;
 end;
 
 procedure TMGPedidoRastreio.setFPedidoSituacao(const Value: Integer);

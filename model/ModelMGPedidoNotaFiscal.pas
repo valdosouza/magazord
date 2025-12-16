@@ -10,32 +10,33 @@ type
   [TableName('TB_MG_PEDIDOS_NOTA_FISCAL')]
   TMGPedidoNotaFiscal = Class(TGenericEntity)
   private
+    FTB_MG_PEDIDO_ID: Integer;
     FId: Integer;
     FNumero: Integer;
     FValorTotal: Real;
-    FDataEmissao: TDateTime;
+    FDataEmissao: String;
     FSituacao: Integer;
     FPedidoRastreioId: Integer;
+    FTB_INSTITUTION_ID: Integer;
     FCfopCodigo: Integer;
     FSerieLegal: string;
     FTipo: Integer;
     FChave: string;
     FSituacaoDescricao: string;
-    FTB_MG_PEDIDO_ID: Integer;
-    FTB_INSTITUTION_ID: Integer;
     procedure setFCfopCodigo(const Value: Integer);
     procedure setFChave(const Value: string);
-    procedure setFDataEmissao(const Value: TDateTime);
+    procedure setFDataEmissao(const Value: String);
     procedure setFId(const Value: Integer);
     procedure setFNumero(const Value: Integer);
     procedure setFPedidoRastreioId(const Value: Integer);
     procedure setFSerieLegal(const Value: string);
     procedure setFSituacao(const Value: Integer);
     procedure setFSituacaoDescricao(const Value: string);
-    procedure setFTipo(const Value: Integer);
-    procedure setFValorTotal(const Value: Real);
     procedure setFTB_INSTITUTION_ID(const Value: Integer);
     procedure setFTB_MG_PEDIDO_ID(const Value: Integer);
+    procedure setFTipo(const Value: Integer);
+    procedure setFValorTotal(const Value: Real);
+
 
   public
     [KeyField('TB_INSTITUTION_ID')]
@@ -57,7 +58,7 @@ type
     property SerieLegal: string read FSerieLegal write setFSerieLegal;
 
     [FieldName('DATA_EMISSAO')]
-    property DataEmissao: TDateTime read FDataEmissao write setFDataEmissao;
+    property DataEmissao: String read FDataEmissao write setFDataEmissao;
 
     [FieldName('CHAVE')]
     property Chave: string read FChave write setFChave;
@@ -84,6 +85,7 @@ type
 
 implementation
 
+
 { TMGPedidoNotaFiscal }
 
 procedure TMGPedidoNotaFiscal.setFCfopCodigo(const Value: Integer);
@@ -96,7 +98,7 @@ begin
   FChave := Value;
 end;
 
-procedure TMGPedidoNotaFiscal.setFDataEmissao(const Value: TDateTime);
+procedure TMGPedidoNotaFiscal.setFDataEmissao(const Value: String);
 begin
   FDataEmissao := Value;
 end;

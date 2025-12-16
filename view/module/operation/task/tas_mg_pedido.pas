@@ -93,6 +93,7 @@ type
     procedure PreencheObservacao;
 
     function ValidaCreateClienteSetes:Boolean;
+    procedure CreateEmpresaSetes;
     procedure CreateClienteSetes;
     procedure CreateEnderecoSetes;
 
@@ -155,6 +156,20 @@ begin
 end;
 
 procedure TTasMgPedido.CreateClienteSetes;
+Begin
+  with Pedido.Cliente.Registro do
+  BEgin
+    Codigo := Pedido.Cliente.Empresa.Registro.Codigo;
+    Ativo := 'S';
+    ObservacaoNF := '';
+    EnviarSomenteXML := 'N';
+    IndicadorIE_Dest := '9';
+  End;
+  Pedido.Cliente.insert;
+
+end;
+
+procedure TTasMgPedido.CreateEmpresaSetes;
 Var
   Lc_CNPJ : String;
 begin
@@ -168,7 +183,7 @@ begin
     InscricaoEstadual :=  '';
     SituacaoCredito := 'L';
     Observacao := '';
-    DataCadastro := MGPedido.Registro.DataHora;
+    DataCadastro := StrToDateDeF( MGPedido.Registro.DataHora,Date);
     Lc_CNPJ := RemoveCaracterInformado(MGPedido.Registro.PessoaCpfCnpj,['.','-','/']);
     if  Length(Lc_CNPJ) = 14 then
       TipoPessoa := 'J'
@@ -180,7 +195,7 @@ begin
     UtilizarMalaDireta := 'S';
     Email := MGPedido.Registro.PessoaEmail;
     WebSite := '';
-    DataFundacao := MGPedido.Registro.PessoaDataNascimento;
+    DataFundacao := StrToDateDef( MGPedido.Registro.PessoaDataNascimento,Date );
     CodigoTransportadora := 0;
     ConsumidorFinal := 'S';
     Multiplicador := 1;
@@ -188,16 +203,6 @@ begin
     IndicadorInscricaoEstadual := '9';
   End;
   Pedido.Cliente.Empresa.insert;
-
-  with Pedido.Cliente.Registro do
-  BEgin
-    Codigo := Pedido.Cliente.Empresa.Registro.Codigo;
-    Ativo := 'S';
-    ObservacaoNF := '';
-    EnviarSomenteXML := 'N';
-    IndicadorIE_Dest := '9';
-  End;
-  Pedido.Cliente.insert;
 
 end;
 
@@ -268,6 +273,7 @@ begin
   End;
   if ValidaCreateClienteSetes then
   Begin
+    CreateEmpresaSetes;
     CreateClienteSetes;
     CreateEnderecoSetes;
   End;
@@ -317,7 +323,7 @@ begin
       Estoque     := Gb_cd_Estoque;
       operacao    := 'S';
       Produto     := Pedido.Itens.Registro.CodigoProduto;
-      Quantidade  := StrToFloatDef(E_Qt_Produto.Text,0);
+      Quantidade  := Pedido.Itens.Registro.Quantidade;
       Data        := Pedido.Registro.Data;
       Tipo        := 'Venda';
       UpdateAt    := Now;
@@ -333,17 +339,17 @@ begin
     Codigo := 0;
     Tipo := 1;
     Usuario := Gb_Cd_Usuario;
-    Data := MGPedido.Registro.DataHora;
+    Data := StrToDateDef( MGPedido.Registro.DataHora,Date );
     Empresa := Pedido.Cliente.Registro.Codigo;
     Vendedor := FCodigoVendedor;
     FormaPagto := FCodigoFormaPagamento;
     Prazo := '';
     Endereco := Pedido.Cliente.Empresa.Endereco.Registro.Codigo;
     QtdeProdutos := 0;
-    ValorProdutos := MGPedido.Registro.ValorProduto;
-    ValorFrete := MGPedido.Registro.ValorFrete;
-    ValorDesconto := MGPedido.Registro.ValorDesconto;
-    ValorPedido := MGPedido.Registro.ValorTotal;
+    ValorProdutos := StrtoFloatDef( MGPedido.Registro.ValorProduto,0);
+    ValorFrete := StrtoFloatDef( MGPedido.Registro.ValorFrete,0);
+    ValorDesconto := StrtoFloatDef( MGPedido.Registro.ValorDesconto,0);
+    ValorPedido := StrtoFloatDef( MGPedido.Registro.ValorTotal,0);
     Faturado := 'N';
     EnderecoEntrega := Pedido.Cliente.Empresa.Endereco.Registro.Codigo;
     CodigoEstabelecimento := Gb_CodMha;
@@ -408,7 +414,7 @@ procedure TTasMgPedido.PreencherPedido;
 begin
   E_Codigo.Text             :=  MGPedido.Registro.Codigo;
   E_Codigo_Secundario.Text  :=  MGPedido.Registro.CodigoSecundario;
-  E_Data.Text               :=  DateTimeToStr(MGPedido.Registro.DataHora);
+  E_Data.Text               :=  MGPedido.Registro.DataHora;
   E_Cliente.Text            :=  MGPedido.Registro.PessoaNome;
   E_Forma_Pagamentos.Text   :=  MGPedido.Registro.FormaPagamentoNome;
   E_Nr_Doc.Text             :=  MGPedido.Registro.PessoaCpfCnpj;
@@ -416,10 +422,10 @@ begin
   E_Forma_recebimento.Text  :=  MGPedido.Registro.FormaRecebimentoNome;
   E_Marketplace.Text        :=  MGPedido.Registro.MarketplaceNome;
   E_Pedido_situacao.Text    :=  MGPedido.Registro.PedidoSituacaoDescricao;
-  E_VL_Frete.Text           :=  FloatToStrF(MGPedido.Registro.ValorFrete,ffNumber,10,2);
-  E_VL_Produto.Text         :=  FloatToStrF(MGPedido.Registro.ValorProduto,ffNumber,10,2);
-  E_VL_Desconto.Text        :=  FloatToStrF(MGPedido.Registro.ValorDesconto,ffNumber,10,2);
-  E_VL_Pedido.Text          :=  FloatToStrF(MGPedido.Registro.ValorTotal,ffNumber,10,2);
+  E_VL_Frete.Text           :=  MGPedido.Registro.ValorFrete;
+  E_VL_Produto.Text         :=  MGPedido.Registro.ValorProduto;
+  E_VL_Desconto.Text        :=  MGPedido.Registro.ValorDesconto;
+  E_VL_Pedido.Text          :=  MGPedido.Registro.ValorTotal;
 
 end;
 
@@ -469,23 +475,23 @@ begin
   MGPedido.Registro.Estabelecimento := Gb_CodMha;
   MGPedido.salva;
 
-  for I := 0 to High(MGApi.Pedido.data.PedidoRastreio) do
+  for I := 0 to High(MGApi.Pedido.data.ArrayPedidoRastreio) do
   Begin
-    MGPedido.ClonarObj(MGApi.Pedido.data.PedidoRastreio[I], MGPedido.Rastreio.Registro);
+    MGPedido.ClonarObj(MGApi.Pedido.data.ArrayPedidoRastreio[I], MGPedido.Rastreio.Registro);
     MGPedido.Rastreio.Registro.Estabelecimento := MGPedido.Registro.Estabelecimento;
     MGPedido.Rastreio.salva;
 
-    for J := 0 to High(MGApi.Pedido.data.PedidoRastreio[I].PedidoItem) do
+    for J := 0 to High(MGApi.Pedido.data.ArrayPedidoRastreio[I].PedidoItem) do
     Begin
-      MGPedido.ClonarObj( MGApi.Pedido.data.PedidoRastreio[I].PedidoItem[J],MGPedido.Item.Registro);
+      MGPedido.ClonarObj( MGApi.Pedido.data.ArrayPedidoRastreio[I].PedidoItem[J],MGPedido.Item.Registro);
       MGPedido.Item.Registro.Estabelecimento :=  MGPedido.Registro.Estabelecimento;
       MGPedido.Item.Registro.PedidoMagazord  :=  MGPedido.Registro.Id;
       MGPedido.Item.salva;
     End;
 
-    for J := 0 to High(MGApi.Pedido.data.PedidoRastreio[I].PedidoNotaFiscal) do
+    for J := 0 to High(MGApi.Pedido.data.ArrayPedidoRastreio[I].PedidoNotaFiscal) do
     Begin
-      MGPedido.ClonarObj( MGApi.Pedido.data.PedidoRastreio[I].PedidoNotaFiscal[J],MGPedido.NotaFiscal.Registro);
+      MGPedido.ClonarObj( MGApi.Pedido.data.ArrayPedidoRastreio[I].PedidoNotaFiscal[J],MGPedido.NotaFiscal.Registro);
       MGPedido.NotaFiscal.Registro.Estabelecimento :=  MGPedido.Registro.Estabelecimento;
       MGPedido.NotaFiscal.Registro.PedidoMagazord  :=  MGPedido.Registro.Id;
       MGPedido.NotaFiscal.salva;
@@ -554,9 +560,20 @@ begin
     Empresa.getByDocumento;
     if Empresa.exist then
     Begin
+      Pedido.Cliente.Registro.Codigo := Empresa.Registro.Codigo;
+      Pedido.Cliente.getById;
+      if not Pedido.Cliente.exist then
+        CreateClienteSetes;
+
       Registro.Codigo := Empresa.Registro.Codigo;
       getallByKey;
+      if not Empresa.Endereco.exist then
+      Begin
+        CreateEnderecoSetes;
+        getallByKey;
+      End;
       Result := False;
+
     End;
   End;
 end;

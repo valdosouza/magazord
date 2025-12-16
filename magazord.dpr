@@ -17,7 +17,8 @@ uses
   tabela_preco_frame_list in 'view\frames\tabela_preco_frame_list.pas' {TabelaPrecoFrameList: TFrame},
   vendedor_frame_list in 'view\frames\vendedor_frame_list.pas' {VendedorFrameList: TFrame},
   tas_generate_order in 'view\module\operation\task\tas_generate_order.pas' {TasGenerateOrder},
-  tas_mg_pedido in 'view\module\operation\task\tas_mg_pedido.pas' {TasMgPedido};
+  tas_mg_pedido in 'view\module\operation\task\tas_mg_pedido.pas' {TasMgPedido},
+  ModelMGPagamentoPix in 'model\ModelMGPagamentoPix.pas';
 
 {$R *.res}
 

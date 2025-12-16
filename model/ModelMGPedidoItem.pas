@@ -33,21 +33,22 @@ type
     FCategoriaArvore: string;
     FQuantidade: Integer;
     FValorItem: Real;
-    FProdutoDerivacaoCodigoKit: string;
+
     FProdutoDerivacaoCodigo: string;
     FEan: string;
     FAnuncioMarketplaceId: Integer;
     FProdutoNome: string;
     FMidiaTipoFile: Integer;
     FProdutoDerivacaoId: Integer;
-    FCategoriaId: Integer;
+
     FDataPreVenda: TDateTime;
     FTB_MG_PEDIDO_ID: Integer;
     FTB_INSTITUTION_ID: Integer;
+    FCategoria_Id: Integer;
     procedure setFAnuncioMarketplaceId(const Value: Integer);
     procedure setFCategoria(const Value: string);
     procedure setFCategoriaArvore(const Value: string);
-    procedure setFCategoriaId(const Value: Integer);
+
     procedure setFCodigoPai(const Value: string);
     procedure setFDataPreVenda(const Value: TDateTime);
     procedure setFDeposito(const Value: Integer);
@@ -64,7 +65,7 @@ type
     procedure setFMidiaTipoFile(const Value: Integer);
     procedure setFPedidoItemListaPresente(const Value: String);
     procedure setFProdutoDerivacaoCodigo(const Value: string);
-    procedure setFProdutoDerivacaoCodigoKit(const Value: string);
+
     procedure setFProdutoDerivacaoId(const Value: Integer);
     procedure setFProdutoDerivacaoNome(const Value: string);
     procedure setFProdutoId(const Value: Integer);
@@ -79,6 +80,7 @@ type
     procedure setFValorUnitario(const Value: Real);
     procedure setFTB_INSTITUTION_ID(const Value: Integer);
     procedure setFTB_MG_PEDIDO_ID(const Value: Integer);
+    procedure setFCategoria_Id(const Value: Integer);
 
   public
     [KeyField('TB_INSTITUTION_ID')]
@@ -147,8 +149,6 @@ type
     [FieldName('PRODUTO_NOME')]
     property ProdutoNome: string read FProdutoNome write setFProdutoNome;
 
-    [FieldName('PRODUTO_DERIVACAO_CODIGO_KIT')]
-    property ProdutoDerivacaoCodigoKit: string read FProdutoDerivacaoCodigoKit write setFProdutoDerivacaoCodigoKit;
 
     [FieldName('ANUNCIO_MARKETPLACE_ID')]
     property AnuncioMarketplaceId: Integer read FAnuncioMarketplaceId write setFAnuncioMarketplaceId;
@@ -178,7 +178,7 @@ type
     property CategoriaArvore: string read FCategoriaArvore write setFCategoriaArvore;
 
     [FieldName('CATEGORIA_ID')]
-    property CategoriaId: Integer read FCategoriaId write setFCategoriaId;
+    property CategoriaId: Integer read FCategoria_Id write setFCategoria_Id;
 
     [FieldName('Categoria')]
     property Categoria: string read FCategoria write setFCategoria;
@@ -210,9 +210,10 @@ begin
   FCategoriaArvore := Value;
 end;
 
-procedure TMGPedidoItem.setFCategoriaId(const Value: Integer);
+
+procedure TMGPedidoItem.setFCategoria_Id(const Value: Integer);
 begin
-  FCategoriaId := Value;
+  FCategoria_Id := Value;
 end;
 
 procedure TMGPedidoItem.setFCodigoPai(const Value: string);
@@ -295,10 +296,6 @@ begin
   FProdutoDerivacaoCodigo := Value;
 end;
 
-procedure TMGPedidoItem.setFProdutoDerivacaoCodigoKit(const Value: string);
-begin
-  FProdutoDerivacaoCodigoKit := Value;
-end;
 
 procedure TMGPedidoItem.setFProdutoDerivacaoId(const Value: Integer);
 begin

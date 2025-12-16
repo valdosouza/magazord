@@ -4,7 +4,7 @@ interface
 
 uses STDatabase,Classes, Vcl.Grids,STQuery, SysUtils,ControllerBase,
       tblGeral ,Generics.Collections,ModelMGPedidoHeader, prm_mg_pedido_header,
-      FireDAC.Stan.Param;
+      FireDAC.Stan.Param,System.StrUtils;
 
 Type
   TListaMGPedidoHeader = TObjectList<TMGPedidoHeader>;
@@ -76,10 +76,29 @@ begin
   Try
     with Lc_Qry do
     Begin
-      sql.add(concat('SELECT * ',
-                      'FROM TB_MG_PEDIDOS_HEADER ',
-                      'WHERE ID IS NOT NULL '
+      sql.add(concat('SELECT PH.* ',
+                      'FROM TB_MG_PEDIDOS_HEADER PH '
       ));
+      case AnsiIndexStr(Parametros.Integrado, ['S', 'N', 'T']) of
+        0:Begin
+            sql.add(concat(
+                  ' INNER JOIN tb_pedido_from_exterior PFE ',
+                  ' ON (PFE.id_exterior = PH.codigo) ',
+                  'WHERE ID IS NOT NULL '
+            ));
+        End;
+        1:Begin
+            sql.add(concat(
+                   '  LEFT JOIN tb_pedido_from_exterior PFE ',
+                   '  ON (PFE.id_exterior  =PH.codigo ) ',
+                   'WHERE PFE.tb_pedido_id IS NULL '
+            ));
+        End;
+        2:Begin
+            sql.add('WHERE ID IS NOT NULL ');
+        End;
+      end;
+
       //Agrega SQÇl
       if Parametros.Periodo then
       Begin

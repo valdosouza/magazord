@@ -101,7 +101,7 @@ end;
 procedure TControllerBase.FinalizaQuery(Qry: TSTQuery);
 begin
   try
-    Qry.Transaction.Commit;
+    if Qry.Transaction.Active then Qry.Transaction.Commit;
   finally
     Qry.Transaction.DisposeOf;
     Qry.Close;

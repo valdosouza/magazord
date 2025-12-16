@@ -9,7 +9,8 @@ type
   [TableName('TB_MG_PEDIDOS_HISTORICO')]
   TMGPedidoHistorico = Class(TGenericEntity)
   private
-    FDataHora: TDateTime;
+    FDataHora: String;
+    FTB_MG_PEDIDO_ID: Integer;
     FPedidoSituacaoDescricao: string;
     FPedidoSituacaoDescricaoDetalhada: string;
     FId: Integer;
@@ -17,12 +18,11 @@ type
     FNomeUsuario: string;
     FPedidoRastreioId: string;
     FTipoUsuario: string;
+    FTB_INSTITUTION_ID: Integer;
     FEtapa: Integer;
     FTipo: Integer;
     FPedidoSituacao: Integer;
-    FTB_MG_PEDIDO_ID: Integer;
-    FTB_INSTITUTION_ID: Integer;
-    procedure setFDataHora(const Value: TDateTime);
+    procedure setFDataHora(const Value: String);
     procedure setFEtapa(const Value: Integer);
     procedure setFId(const Value: Integer);
     procedure setFNomeUsuario(const Value: string);
@@ -31,10 +31,11 @@ type
     procedure setFPedidoSituacaoDescricao(const Value: string);
     procedure setFPedidoSituacaoDescricaoDetalhada(const Value: string);
     procedure setFSituacao(const Value: Integer);
-    procedure setFTipo(const Value: Integer);
-    procedure setFTipoUsuario(const Value: string);
     procedure setFTB_INSTITUTION_ID(const Value: Integer);
     procedure setFTB_MG_PEDIDO_ID(const Value: Integer);
+    procedure setFTipo(const Value: Integer);
+    procedure setFTipoUsuario(const Value: string);
+
 
   public
 
@@ -51,7 +52,7 @@ type
     property Id: Integer read FId write setFId;
 
     [FieldName('DATA_HORA')]
-    property DataHora: TDateTime read FDataHora write setFDataHora;
+    property DataHora: String read FDataHora write setFDataHora;
 
     [FieldName('PEDIDO_SITUACAO')]
     property PedidoSituacao: Integer read FPedidoSituacao write setFPedidoSituacao;
@@ -85,9 +86,10 @@ type
 
 implementation
 
+
 { TMGPedidoHistorico }
 
-procedure TMGPedidoHistorico.setFDataHora(const Value: TDateTime);
+procedure TMGPedidoHistorico.setFDataHora(const Value: String);
 begin
   FDataHora := Value;
 end;

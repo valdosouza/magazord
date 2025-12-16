@@ -634,6 +634,10 @@ inherited TasMgPedido: TTasMgPedido
       object tbs_delivery: TTabSheet
         Caption = 'Dados de Entrega'
         ImageIndex = 1
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object Pnl_delivery: TPanel
           Left = 0
           Top = 0
@@ -900,6 +904,10 @@ inherited TasMgPedido: TTasMgPedido
       object TabSheet2: TTabSheet
         Caption = 'Observa'#231#245'es'
         ImageIndex = 2
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object E_Note: TMemo
           Left = 0
           Top = 0
@@ -907,10 +915,6 @@ inherited TasMgPedido: TTasMgPedido
           Height = 345
           Align = alClient
           TabOrder = 0
-          ExplicitLeft = 232
-          ExplicitTop = 240
-          ExplicitWidth = 185
-          ExplicitHeight = 89
         end
       end
     end
